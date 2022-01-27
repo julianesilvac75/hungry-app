@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { REGEX_EMAIL, SIX } from '../services/constants';
 import AppRecipesContext from '../context/AppRecipesContext';
 
-function Login() {
+function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setMealsToken, setCocktailsToken,
@@ -11,10 +12,11 @@ function Login() {
   const validated = REGEX_EMAIL.test(email) && password.length > SIX;
 
   const btnSubmit = () => {
-    // const { history } = props;
+    const { history } = props;
     setMealsToken(1);
     setCocktailsToken(1);
     setUserToken({ email });
+    history.push('./foods');
   };
 
   return (
@@ -56,5 +58,11 @@ function Login() {
     </form>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Login;
