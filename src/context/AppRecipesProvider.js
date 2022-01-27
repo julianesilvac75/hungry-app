@@ -7,11 +7,15 @@ const AppRecipesProvider = ({ children }) => {
   // const [saveEmail, setSaveEmail] = useLocalStorage()
   const [mealsToken, setMealsToken] = useLocalStorage('mealsToken', '');
   const [cocktailsToken, setCocktailsToken] = useLocalStorage('cocktailsToken', '');
+  const [userToken, setUserToken] = useLocalStorage('user', {});
+
   const valueContext = {
     setMealsToken,
     setCocktailsToken,
+    setUserToken,
     mealsToken,
     cocktailsToken,
+    userToken,
   };
 
   return (
