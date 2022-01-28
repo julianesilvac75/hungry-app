@@ -16,6 +16,7 @@ function SearchBar() {
         <input
           type="radio"
           id="ingredient"
+          name="search-filter"
           value="ingredient"
           data-testid="ingredient-search-radio"
         />
@@ -28,6 +29,7 @@ function SearchBar() {
         <input
           type="radio"
           id="name"
+          name="search-filter"
           value="name"
           data-testid="name-search-radio"
         />
@@ -40,6 +42,7 @@ function SearchBar() {
         <input
           type="radio"
           id="first-letter"
+          name="search-filter"
           value="first-letter"
           data-testid="first-letter-search-radio"
         />
