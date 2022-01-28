@@ -8,8 +8,6 @@ function SearchBar({ getRecipesFromApi }) {
   const [input, setInput] = useState('');
   const [option, setOption] = useState('ingredient');
   const { pathname } = useLocation();
-  console.log(input);
-  console.log(option);
 
   function validateFirstLetter() {
     if (input.length > 1 && option === 'first-letter') {

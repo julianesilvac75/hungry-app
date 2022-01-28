@@ -8,4 +8,9 @@ export const URLS = {
     name: (nome) => (`https://www.themealdb.com/api/json/v1/1/search.php?s=${nome}`),
     'first-letter': (firstLetter) => (`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`),
   },
+  drinks: {
+    ingredient: (ingredient) => (`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`),
+    name: (nome) => (`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${nome}`),
+    'first-letter': (firstLetter) => (`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`),
+  },
 };
