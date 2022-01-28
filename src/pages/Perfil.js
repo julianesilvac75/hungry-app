@@ -29,6 +29,7 @@ function Perfil() {
       <Link
         to="/"
         data-testid="profile-logout-btn"
+        onClick={ () => localStorage.clear() }
       >
         Logout
       </Link>
