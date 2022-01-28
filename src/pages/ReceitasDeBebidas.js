@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipesCard from '../components/RecipesCard';
-import { TWELVE } from '../services/constants';
+import { URLS, TWELVE } from '../services/constants';
+import fetchAPI from '../services/api';
 
 function ReceitasDeBebidas() {
   const [recipes, setRecipes] = useState([]);
-  console.log(recipes);
+
   const getRecipesFromApi = (data) => {
     if (data.drinks === null) {
       return alert('Sorry, we haven\'t found any recipes for these filters.');// eslint-disable-line no-alert
     }
     setRecipes(data.drinks);
   };
+
+  useEffect(() => {
+    fetchAPI(URLS.drinks.default, getRecipesFromApi);
+  }, []);
 
   if (recipes.length === 1) {
     return <Redirect to={ `/drinks/${recipes[0].idDrink}` } />;
