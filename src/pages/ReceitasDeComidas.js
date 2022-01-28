@@ -4,7 +4,7 @@ import Header from '../components/Header';
 function ReceitasDeComidas() {
   return (
     <div>
-      <Header titleHeader="Foods" />
+      <Header titleHeader="Foods" isVisible />
     </div>
   );
 }
