@@ -1,4 +1,7 @@
 import React from 'react';
+import shareIcon from '../images/shareIcon.svg';
+
+const index = 1;
 
 function DoneFavRecipeCard() {
   return (
@@ -11,7 +14,10 @@ function DoneFavRecipeCard() {
         type="button"
         data-testid={ `${index}-horizontal-share-btn` }
       >
-        Compartilhar
+        <img
+          src={ shareIcon }
+          alt="Share Icon"
+        />
 
       </button>
 
