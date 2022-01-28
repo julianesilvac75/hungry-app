@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function ReceitasFavoritas() {
   return (
-    <div />
+    <div>
+      <Header titleHeader="Favorite Recipes" isVisible={ false } />
+    </div>
   );
 }
 
