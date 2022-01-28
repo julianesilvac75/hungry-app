@@ -15,7 +15,9 @@ import { DetalhesDeBebidas,
   ReceitasFeitas,
   Perfil,
   ReceitasFavoritas,
-  ExplorarBebidasIngredientes } from './pages';
+  ExplorarBebidasIngredientes,
+  NotFound,
+} from './pages';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -60,6 +62,7 @@ function App() {
         <Route exact path="/profile" component={ Perfil } />
         <Route exact path="/done-recipes" component={ ReceitasFeitas } />
         <Route exact path="/favorite-recipes" component={ ReceitasFavoritas } />
+        <Route exact path="/explore/drinks/nationalities" component={ NotFound } />
       </Switch>
     </div>
   );
