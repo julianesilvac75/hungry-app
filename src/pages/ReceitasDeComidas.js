@@ -9,6 +9,9 @@ function ReceitasDeComidas() {
   const [recipes, setRecipes] = useState([]);
   console.log(recipes);
   const getRecipesFromApi = (data) => {
+    if (data.meals === null) {
+      return alert('Sorry, we haven\'t found any recipes for these filters.');// eslint-disable-line no-alert
+    }
     setRecipes(data.meals);
   };
 

@@ -8,7 +8,12 @@ import { TWELVE } from '../services/constants';
 function ReceitasDeBebidas() {
   const [recipes, setRecipes] = useState([]);
   console.log(recipes);
-  const getRecipesFromApi = (data) => setRecipes(data.drinks);
+  const getRecipesFromApi = (data) => {
+    if (data.drinks === null) {
+      return alert('Sorry, we haven\'t found any recipes for these filters.');// eslint-disable-line no-alert
+    }
+    setRecipes(data.drinks);
+  };
 
   if (recipes.length === 1) {
     return <Redirect to={ `/drinks/${recipes[0].idDrink}` } />;
