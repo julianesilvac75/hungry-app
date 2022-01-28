@@ -29,3 +29,5 @@ export { default as ExplorarComidasNacionalidade } from './ExplorarComidasNacion
 export { default as ReceitasFavoritas } from './ReceitasFavoritas';
 
 export { default as ReceitasFeitas } from './ReceitasFeitas';
+
+export { default as NotFound } from './NotFound';
