@@ -29,13 +29,13 @@ describe('Profile screen', () => {
     });
   });
 
-  describe('83 - Implemente a solução de maneira que o e-mail da pessoa usuária deve estar visível', () => {
+  describe.only('83 - Implemente a solução de maneira que o e-mail da pessoa usuária deve estar visível', () => {
     it('O e-mail armazenado em localStorage está visível', () => {
       cy.get('[data-testid="profile-email"]').contains('email@mail.com');
     });
   });
 
-  describe('84 - Implemente 3 botões: um de nome "Done Recipes", um de nome "Favorite Recipes" e um de nome "Logout"', () => {
+  describe.only('84 - Implemente 3 botões: um de nome "Done Recipes", um de nome "Favorite Recipes" e um de nome "Logout"', () => {
     it('A tela contêm todos os 3 botões', () => {
       cy.get('[data-testid="profile-done-btn"]').contains('Done Recipes');
       cy.get('[data-testid="profile-favorite-btn"]').contains('Favorite Recipes');
@@ -43,14 +43,14 @@ describe('Profile screen', () => {
     });
   });
 
-  describe('85 - Redirecione a pessoa usuária que, ao clicar no botão de "Done Recipes", a rota deve mudar para a tela de receitas feitas', () => {
+  describe.only('85 - Redirecione a pessoa usuária que, ao clicar no botão de "Done Recipes", a rota deve mudar para a tela de receitas feitas', () => {
     it('Redireciona para a rota correta', () => {
       cy.get('[data-testid="profile-done-btn"]').click();
       cy.location().should((loc) => expect(loc.pathname).to.eq('/done-recipes'));
     });
   });
 
-  describe('86 - Redirecione a pessoa usuária que, ao clicar no botão de "Favorite Recipes", a rota deve mudar para a tela de receitas favoritas', () => {
+  describe.only('86 - Redirecione a pessoa usuária que, ao clicar no botão de "Favorite Recipes", a rota deve mudar para a tela de receitas favoritas', () => {
     it('Redireciona para a rota correta', () => {
       cy.get('[data-testid="profile-favorite-btn"]').click();
       cy.location().should((loc) => expect(loc.pathname).to.eq('/favorite-recipes'));

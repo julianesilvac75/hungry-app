@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import AppRecipesContext from '../context/AppRecipesContext';
 
 function Perfil() {
+  const { userToken: { email } } = useContext(AppRecipesContext);
   return (
     <div>
       <Header titleHeader="Profile" isVisible={ false } />
       <p
         data-testid="profile-email"
       >
-        email
+        {email}
       </p>
       <Link
         to="/done-recipes"
