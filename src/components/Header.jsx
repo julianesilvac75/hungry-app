@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 
-function Header({ titleHeader, isVisible = true }) {
+function Header({ titleHeader, isVisible = true, getRecipesFromApi }) {
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -40,7 +40,7 @@ function Header({ titleHeader, isVisible = true }) {
         )
       }
 
-      { toggle && <SearchBar /> }
+      { toggle && <SearchBar getRecipesFromApi={ getRecipesFromApi } /> }
 
     </header>
   );
@@ -49,6 +49,7 @@ function Header({ titleHeader, isVisible = true }) {
 Header.propTypes = {
   titleHeader: PropTypes.string.isRequired,
   isVisible: PropTypes.bool.isRequired,
+  getRecipesFromApi: PropTypes.func.isRequired,
 };
 
 export default Header;
