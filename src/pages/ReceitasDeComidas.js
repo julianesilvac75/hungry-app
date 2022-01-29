@@ -10,6 +10,7 @@ import fetchAPI from '../services/api';
 function ReceitasDeComidas() {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [recipesFiltered, setRecipesFiltered] = useState([]);
 
   const getRecipesFromApi = (data) => {
     if (data.meals === null) {
@@ -27,9 +28,15 @@ function ReceitasDeComidas() {
     return <Redirect to={ `/foods/${recipes[0].idMeal}` } />;
   }
 
+  function whichCards() {
+    if (recipesFiltered.length > 0) {
+      return recipesFiltered;
+    }
+    return recipes;
+  }
+
   function renderCards() {
-    return recipes
-      .filter((recipe, i) => i < TWELVE)
+    return whichCards().filter((recipe, i) => i < TWELVE)
       .map(({ strMeal, strMealThumb }, i) => (
         <RecipesCard
           index={ i }
@@ -40,6 +47,11 @@ function ReceitasDeComidas() {
       ));
   }
 
+  function categoriesBtnHandler(strCategory) {
+    const URL = URLS.foods.categorySelected(strCategory);
+    fetchAPI(URL, (data) => setRecipesFiltered(data.meals));
+  }
+
   function renderCategories() {
     return categories
       .filter((category, i) => i < FIVE)
@@ -48,6 +60,7 @@ function ReceitasDeComidas() {
           type="button"
           key={ strCategory }
           data-testid={ `${strCategory}-category-filter` }
+          onClick={ () => categoriesBtnHandler(strCategory) }
         >
           {strCategory}
 

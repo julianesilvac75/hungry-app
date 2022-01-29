@@ -13,6 +13,7 @@ export const URLS = {
     'first-letter': (firstLetter) => (`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`),
     default: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
     category: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
+    categorySelected: (category) => (`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`),
   },
   drinks: {
     ingredient: (ingredient) => (`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`),
@@ -20,5 +21,7 @@ export const URLS = {
     'first-letter': (firstLetter) => (`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`),
     default: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
     category: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
+    categorySelected: (category) => (
+      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`),
   },
 };
