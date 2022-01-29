@@ -38,12 +38,13 @@ function ReceitasDeBebidas() {
   function renderCards() {
     return whichCards()
       .filter((recipe, i) => i < TWELVE)
-      .map(({ strDrink, strDrinkThumb }, i) => (
+      .map(({ strDrink, strDrinkThumb, idDrink }, i) => (
         <RecipesCard
           index={ i }
           name={ strDrink }
           url={ strDrinkThumb }
-          key={ strDrink }
+          key={ idDrink }
+          id={ idDrink }
         />
       ));
   }
@@ -60,19 +61,32 @@ function ReceitasDeBebidas() {
   }
 
   function renderCategories() {
-    return categories
-      .filter((category, i) => i < FIVE)
-      .map(({ strCategory }) => (
+    return (
+      <div>
+        {
+          categories
+            .filter((category, i) => i < FIVE)
+            .map(({ strCategory }) => (
+              <button
+                type="button"
+                key={ strCategory }
+                data-testid={ `${strCategory}-category-filter` }
+                onClick={ () => categoriesBtnHandler(strCategory) }
+              >
+                {strCategory}
+
+              </button>
+            ))
+        }
         <button
           type="button"
-          key={ strCategory }
-          data-testid={ `${strCategory}-category-filter` }
-          onClick={ () => categoriesBtnHandler(strCategory) }
+          onClick={ () => setRecipesFiltered([]) }
+          data-testid="All-category-filter"
         >
-          {strCategory}
-
+          All
         </button>
-      ));
+      </div>
+    );
   }
 
   return (
