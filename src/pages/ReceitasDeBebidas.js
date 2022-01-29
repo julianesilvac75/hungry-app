@@ -10,6 +10,7 @@ function ReceitasDeBebidas() {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [recipesFiltered, setRecipesFiltered] = useState([]);
+  const [actualCategory, setActualCategory] = useState('');
 
   const getRecipesFromApi = (data) => {
     if (data.drinks === null) {
@@ -48,8 +49,14 @@ function ReceitasDeBebidas() {
   }
 
   function categoriesBtnHandler(strCategory) {
+    if (actualCategory === strCategory) {
+      setActualCategory('');
+      return setRecipesFiltered([]);
+    }
+
     const URL = URLS.drinks.categorySelected(strCategory);
     fetchAPI(URL, (data) => setRecipesFiltered(data.drinks));
+    setActualCategory(strCategory);
   }
 
   function renderCategories() {

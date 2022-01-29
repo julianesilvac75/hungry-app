@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
@@ -11,6 +10,7 @@ function ReceitasDeComidas() {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [recipesFiltered, setRecipesFiltered] = useState([]);
+  const [actualCategory, setActualCategory] = useState('');
 
   const getRecipesFromApi = (data) => {
     if (data.meals === null) {
@@ -48,8 +48,14 @@ function ReceitasDeComidas() {
   }
 
   function categoriesBtnHandler(strCategory) {
+    if (actualCategory === strCategory) {
+      setActualCategory('');
+      return setRecipesFiltered([]);
+    }
+
     const URL = URLS.foods.categorySelected(strCategory);
     fetchAPI(URL, (data) => setRecipesFiltered(data.meals));
+    setActualCategory(strCategory);
   }
 
   function renderCategories() {
