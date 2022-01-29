@@ -38,12 +38,13 @@ function ReceitasDeBebidas() {
   function renderCards() {
     return whichCards()
       .filter((recipe, i) => i < TWELVE)
-      .map(({ strDrink, strDrinkThumb }, i) => (
+      .map(({ strDrink, strDrinkThumb, idDrink }, i) => (
         <RecipesCard
           index={ i }
           name={ strDrink }
           url={ strDrinkThumb }
-          key={ strDrink }
+          key={ idDrink }
+          id={ idDrink }
         />
       ));
   }

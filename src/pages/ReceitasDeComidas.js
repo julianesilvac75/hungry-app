@@ -37,12 +37,13 @@ function ReceitasDeComidas() {
 
   function renderCards() {
     return whichCards().filter((recipe, i) => i < TWELVE)
-      .map(({ strMeal, strMealThumb }, i) => (
+      .map(({ strMeal, strMealThumb, idMeal }, i) => (
         <RecipesCard
           index={ i }
           name={ strMeal }
           url={ strMealThumb }
-          key={ strMeal }
+          key={ idMeal }
+          id={ idMeal }
         />
       ));
   }
