@@ -2,7 +2,7 @@
 
 const fetchMock = require('../mocks/fetch');
 
-describe('70 - Implemente os elementos da tela de explorar bebidas ou comidas respeitando os atributos descritos no protótipo', () => {
+describe.only('70 - Implemente os elementos da tela de explorar bebidas ou comidas respeitando os atributos descritos no protótipo', () => {
   it('Tem os data-testids corretos para a tela de explorar comidas', () => {
     cy.visit('http://localhost:3000/explore/foods');
 
@@ -20,7 +20,7 @@ describe('70 - Implemente os elementos da tela de explorar bebidas ou comidas re
   });
 });
 
-describe('71 - Desenvolva 3 botões: um para explorar por ingrediente, um para explorar por nacionalidade e um para pegar uma receita aleatória', () => {
+describe.only('71 - Desenvolva 3 botões: um para explorar por ingrediente, um para explorar por nacionalidade e um para pegar uma receita aleatória', () => {
   it('Tem os botões "By Ingredient", "By Nationality" e "Surprise me!" para a tela de explorar comidas', () => {
     cy.visit('http://localhost:3000/explore/foods');
 
@@ -38,7 +38,7 @@ describe('71 - Desenvolva 3 botões: um para explorar por ingrediente, um para e
   });
 });
 
-describe('72 - Redirecione a pessoa usuária ao clicar em "By Ingredient", a rota deve mudar para a tela de explorar por ingredientes', () => {
+describe.only('72 - Redirecione a pessoa usuária ao clicar em "By Ingredient", a rota deve mudar para a tela de explorar por ingredientes', () => {
   it('Ao clicar no botão "By Ingredient" da tela de explorar comidas a rota muda para a página de explorar comidas por ingrediente', () => {
     cy.visit('http://localhost:3000/explore/foods');
 
@@ -54,7 +54,7 @@ describe('72 - Redirecione a pessoa usuária ao clicar em "By Ingredient", a rot
   });
 });
 
-describe('73 - Redirecione a pessoa usuária ao clicar em "By Nationality", a rota deve mudar para tela de explorar por nacionalidades', () => {
+describe.only('73 - Redirecione a pessoa usuária ao clicar em "By Nationality", a rota deve mudar para tela de explorar por nacionalidades', () => {
   it('A rota deve mudar para tela de explorar por nacionalidade', () => {
     cy.visit('http://localhost:3000/explore/foods');
 
