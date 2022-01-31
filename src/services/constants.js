@@ -14,6 +14,7 @@ export const URLS = {
     default: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
     category: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
     categorySelected: (category) => (`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`),
+    randomRecipe: 'https://www.themealdb.com/api/json/v1/1/random.php',
   },
   drinks: {
     ingredient: (ingredient) => (`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`),
@@ -23,5 +24,6 @@ export const URLS = {
     category: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
     categorySelected: (category) => (
       `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`),
+    randomRecipe: 'https://www.thecocktaildb.com/api/json/v1/1/random.php',
   },
 };
