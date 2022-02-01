@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-// import AppRecipesContext from '../context/AppRecipesContext';
+import AppRecipesContext from '../context/AppRecipesContext';
 
 const copy = require('clipboard-copy');
 
@@ -16,13 +16,32 @@ function DetailsCard({ recipeDetails }) {
     measure,
     instructions,
     video,
-    alcoholic,
+    alcoholicOrNot,
+    id,
+    type,
+    nationality,
   } = recipeDetails;
 
   const { pathname } = useLocation();
-  // const { favoriteRecipes, setFavoriteRecipes } = useContext(AppRecipesContext);
+  const { favoriteRecipes, setFavoriteRecipes } = useContext(AppRecipesContext);
   const [favorite, setFavorite] = useState(false);
   const [link, setLink] = useState(false);
+
+  const handleFavoriteButton = () => {
+    const newRecipe = { id,
+      type,
+      nationality,
+      category,
+      alcoholicOrNot,
+      name,
+      image };
+    setFavorite(!favorite);
+
+    console.log(newRecipe);
+    return !favoriteRecipes.some((recipe) => (
+      recipe.id === id
+    )) && setFavoriteRecipes((prevState) => [...prevState, newRecipe]);
+  };
 
   return (
     <section>
@@ -59,7 +78,7 @@ function DetailsCard({ recipeDetails }) {
         src={ favorite ? blackHeartIcon : whiteHeartIcon }
         data-testid="favorite-btn"
         type="button"
-        onClick={ () => setFavorite((prevState) => !prevState) }
+        onClick={ handleFavoriteButton }
       >
         <img
           alt="Favorite Icon"
@@ -70,7 +89,7 @@ function DetailsCard({ recipeDetails }) {
       <p
         data-testid="recipe-category"
       >
-        {pathname.includes('drink') ? alcoholic : category}
+        {pathname.includes('drink') ? alcoholicOrNot : category}
 
       </p>
       <h2>Ingredients</h2>
@@ -103,9 +122,12 @@ DetailsCard.propTypes = {
     category: PropTypes.string,
     instructions: PropTypes.string,
     video: PropTypes.string,
+    id: PropTypes.string,
+    nationality: PropTypes.string,
+    type: PropTypes.string,
     ingredients: PropTypes.arrayOf(PropTypes.array),
     measure: PropTypes.arrayOf(PropTypes.array),
-    alcoholic: PropTypes.string.isRequired,
+    alcoholicOrNot: PropTypes.string,
   }).isRequired,
 };
 

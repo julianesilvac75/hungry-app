@@ -51,9 +51,9 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
             measure: extractProperties('Measure'),
             instructions: recipeDetails[0].strInstructions,
             id: recipeDetails[0].idDrink,
-            nationality: recipeDetails[0].strArea,
-            type: 'bebida',
-            alcoholic: recipeDetails[0].strAlcoholic,
+            nationality: '',
+            type: 'drink',
+            alcoholicOrNot: recipeDetails[0].strAlcoholic,
           } }
         />
       }

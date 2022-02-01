@@ -55,8 +55,8 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
             video: recipeDetails[0].strYoutube,
             id: recipeDetails[0].idMeal,
             nationality: recipeDetails[0].strArea,
-            type: 'comida',
-            alcoholic: '',
+            type: 'food',
+            alcoholicOrNot: '',
           } }
         />
       }
