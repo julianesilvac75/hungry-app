@@ -10,7 +10,8 @@ function DetailsCard({ recipeDetails }) {
     ingredients,
     measure,
     instructions,
-    video } = recipeDetails;
+    video,
+  } = recipeDetails;
 
   return (
     <section>
@@ -43,7 +44,8 @@ function DetailsCard({ recipeDetails }) {
             data-testid={ `${index}-ingredient-name-and-measure` }
             key={ ingredient[1] }
           >
-            { `${ingredient[1]} - ${measure[index][1]}`}
+            { `${ingredient[1]} - ${measure[index] === undefined
+              ? '' : measure[index][1]}`}
           </li>
         ))}
       </ul>
@@ -55,7 +57,6 @@ function DetailsCard({ recipeDetails }) {
         src={ `https://www.youtube.com/embed/${video.split('v=')[1]}` }
       />}
       <h2>Recommended</h2>
-      <span data-testid="0-recomendation-card">Receitas recomendadas</span>
     </section>);
 }
 

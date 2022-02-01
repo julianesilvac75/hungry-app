@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import DetailsCard from '../components/DetailsCard';
 import CarouselCard from '../components/CarouselCard';
 import fetchAPI from '../services/api';
 import { URLS } from '../services/constants';
+import AppRecipesContext from '../context/AppRecipesContext';
 
 function DetalhesDeBebidas({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [carouselDetails, setCarouselDetails] = useState([]);
+  const { doneRecipes } = useContext(AppRecipesContext);
 
   function extractProperties(key) {
     return Object.entries(recipeDetails[0])
@@ -37,7 +39,7 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
   return (
     <div>
       {
-        recipeDetails.length && <DetailsCard
+        recipeDetails.length > 0 && <DetailsCard
           recipeDetails={ {
             name: recipeDetails[0].strDrink,
             image: recipeDetails[0].strDrinkThumb,
@@ -49,12 +51,23 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
         />
       }
       {
-        carouselDetails.length && <CarouselCard
+        carouselDetails.length > 0 && <CarouselCard
           recipeDetails={ objFromCarouselDetails() }
         />
       }
 
-      <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
+      {
+        !doneRecipes.some((recipe) => recipe.id === id) && (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            style={ { position: 'fixed', bottom: '0' } }
+          >
+            Start Recipe
+
+          </button>
+        )
+      }
     </div>
   );
 }
