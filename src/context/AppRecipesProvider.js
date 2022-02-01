@@ -19,6 +19,8 @@ const AppRecipesProvider = ({ children }) => {
     favoriteRecipes, setFavoriteRecipes,
   ] = useLocalStorage('favoriteRecipes', []);
 
+  const verifyFavorite = (id) => favoriteRecipes.some((recipe) => recipe.id === id);
+
   const valueContext = {
     setMealsToken,
     setCocktailsToken,
@@ -32,6 +34,7 @@ const AppRecipesProvider = ({ children }) => {
     setInProgressRecipes,
     favoriteRecipes,
     setFavoriteRecipes,
+    verifyFavorite,
   };
 
   return (

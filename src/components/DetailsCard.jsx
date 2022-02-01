@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
-// import AppRecipesContext from '../context/AppRecipesContext';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import AppRecipesContext from '../context/AppRecipesContext';
 
 const copy = require('clipboard-copy');
 
@@ -15,11 +16,34 @@ function DetailsCard({ recipeDetails }) {
     measure,
     instructions,
     video,
+    alcoholicOrNot,
+    id,
+    type,
+    nationality,
   } = recipeDetails;
 
-  // const { favoriteRecipes, setFavoriteRecipes } = useContext(AppRecipesContext);
-
+  const { pathname } = useLocation();
+  const {
+    setFavoriteRecipes,
+    verifyFavorite } = useContext(AppRecipesContext);
   const [link, setLink] = useState(false);
+
+  const handleFavoriteButton = () => {
+    const newRecipe = { id,
+      type,
+      nationality,
+      category,
+      alcoholicOrNot,
+      name,
+      image };
+
+    if (!verifyFavorite(id)) {
+      return setFavoriteRecipes((prevState) => [...prevState, newRecipe]);
+    }
+
+    return setFavoriteRecipes((prevState) => (
+      prevState.filter((recipe) => recipe.id !== id)));
+  };
 
   return (
     <section>
@@ -53,17 +77,23 @@ function DetailsCard({ recipeDetails }) {
       {link && <p>Link copied!</p>}
 
       <button
-        src={ whiteHeartIcon }
+        src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
         data-testid="favorite-btn"
         type="button"
+        onClick={ handleFavoriteButton }
       >
         <img
           alt="Favorite Icon"
-          src={ whiteHeartIcon }
+          src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
         />
       </button>
 
-      <p data-testid="recipe-category">{category}</p>
+      <p
+        data-testid="recipe-category"
+      >
+        {pathname.includes('drink') ? alcoholicOrNot : category}
+
+      </p>
       <h2>Ingredients</h2>
       <ul>
         { ingredients.map((ingredient, index) => (
@@ -94,8 +124,12 @@ DetailsCard.propTypes = {
     category: PropTypes.string,
     instructions: PropTypes.string,
     video: PropTypes.string,
+    id: PropTypes.string,
+    nationality: PropTypes.string,
+    type: PropTypes.string,
     ingredients: PropTypes.arrayOf(PropTypes.array),
     measure: PropTypes.arrayOf(PropTypes.array),
+    alcoholicOrNot: PropTypes.string,
   }).isRequired,
 };
 
