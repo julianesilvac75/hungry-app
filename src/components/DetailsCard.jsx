@@ -23,8 +23,10 @@ function DetailsCard({ recipeDetails }) {
   } = recipeDetails;
 
   const { pathname } = useLocation();
-  const { favoriteRecipes, setFavoriteRecipes } = useContext(AppRecipesContext);
-  const [favorite, setFavorite] = useState(false);
+  const {
+    // favoriteRecipes,
+    setFavoriteRecipes,
+    verifyFavorite } = useContext(AppRecipesContext);
   const [link, setLink] = useState(false);
 
   const handleFavoriteButton = () => {
@@ -35,12 +37,13 @@ function DetailsCard({ recipeDetails }) {
       alcoholicOrNot,
       name,
       image };
-    setFavorite(!favorite);
 
-    console.log(newRecipe);
-    return !favoriteRecipes.some((recipe) => (
-      recipe.id === id
-    )) && setFavoriteRecipes((prevState) => [...prevState, newRecipe]);
+    if (!verifyFavorite(id)) {
+      return setFavoriteRecipes((prevState) => [...prevState, newRecipe]);
+    }
+
+    return setFavoriteRecipes((prevState) => (
+      prevState.filter((recipe) => recipe.id !== id)));
   };
 
   return (
@@ -75,14 +78,14 @@ function DetailsCard({ recipeDetails }) {
       {link && <p>Link copied!</p>}
 
       <button
-        src={ favorite ? blackHeartIcon : whiteHeartIcon }
+        src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
         data-testid="favorite-btn"
         type="button"
         onClick={ handleFavoriteButton }
       >
         <img
           alt="Favorite Icon"
-          src={ favorite ? blackHeartIcon : whiteHeartIcon }
+          src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
         />
       </button>
 
