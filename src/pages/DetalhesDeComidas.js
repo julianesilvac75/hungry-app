@@ -39,6 +39,8 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
     ));
   }
 
+  console.log(recipeDetails);
+
   return (
     <div>
       {
@@ -51,6 +53,9 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
             measure: extractProperties('Measure'),
             instructions: recipeDetails[0].strInstructions,
             video: recipeDetails[0].strYoutube,
+            id: recipeDetails[0].idMeal,
+            nationality: recipeDetails[0].strArea,
+            type: 'comida',
           } }
         />
       }

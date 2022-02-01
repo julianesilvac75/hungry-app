@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
+// import AppRecipesContext from '../context/AppRecipesContext';
 
 const copy = require('clipboard-copy');
 
@@ -14,6 +16,8 @@ function DetailsCard({ recipeDetails }) {
     instructions,
     video,
   } = recipeDetails;
+
+  // const { favoriteRecipes, setFavoriteRecipes } = useContext(AppRecipesContext);
 
   const [link, setLink] = useState(false);
 
@@ -47,11 +51,18 @@ function DetailsCard({ recipeDetails }) {
       </button>
 
       {link && <p>Link copied!</p>}
-      <img
-        alt="Favorite Icon"
+
+      <button
         src={ whiteHeartIcon }
         data-testid="favorite-btn"
-      />
+        type="button"
+      >
+        <img
+          alt="Favorite Icon"
+          src={ whiteHeartIcon }
+        />
+      </button>
+
       <p data-testid="recipe-category">{category}</p>
       <h2>Ingredients</h2>
       <ul>
