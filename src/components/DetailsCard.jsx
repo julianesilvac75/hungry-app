@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+
+const copy = require('clipboard-copy');
 
 function DetailsCard({ recipeDetails }) {
   const { name,
@@ -12,6 +14,8 @@ function DetailsCard({ recipeDetails }) {
     instructions,
     video,
   } = recipeDetails;
+
+  const [link, setLink] = useState(false);
 
   return (
     <section>
@@ -26,11 +30,23 @@ function DetailsCard({ recipeDetails }) {
       >
         {name}
       </h1>
-      <img
-        alt="Share Icon"
+      <button
         src={ shareIcon }
+        type="button"
         data-testid="share-btn"
-      />
+        onClick={ () => {
+          copy(window.location.href);
+          setLink(true);
+        } }
+      >
+        <img
+          alt="Share Icon"
+          src={ shareIcon }
+        />
+
+      </button>
+
+      {link && <p>Link copied!</p>}
       <img
         alt="Favorite Icon"
         src={ whiteHeartIcon }
