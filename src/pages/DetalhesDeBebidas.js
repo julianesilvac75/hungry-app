@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DetailsCard from '../components/DetailsCard';
+import CarouselCard from '../components/CarouselCard';
 import fetchAPI from '../services/api';
 import { URLS } from '../services/constants';
 
 function DetalhesDeBebidas({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
-  console.log(recipeDetails);
+  const [carouselDetails, setCarouselDetails] = useState([]);
 
   function extractProperties(key) {
     return Object.entries(recipeDetails[0])
@@ -18,17 +19,36 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
     fetchAPI(URL(id), (data) => setRecipeDetails(data.drinks));
   }, [id]);
 
+  useEffect(() => {
+    const URL = URLS.foods.default;
+    fetchAPI(URL, (data) => setCarouselDetails(data.meals));
+  }, []);
+
   return (
-    recipeDetails.length && <DetailsCard
-      recipeDetails={ {
-        name: recipeDetails[0].strDrink,
-        image: recipeDetails[0].strDrinkThumb,
-        category: recipeDetails[0].strAlcoholic,
-        ingredients: extractProperties('Ingredient'),
-        measure: extractProperties('Measure'),
-        instructions: recipeDetails[0].strInstructions,
-      } }
-    />
+    <div>
+      {
+        recipeDetails.length && <DetailsCard
+          recipeDetails={ {
+            name: recipeDetails[0].strDrink,
+            image: recipeDetails[0].strDrinkThumb,
+            category: recipeDetails[0].strAlcoholic,
+            ingredients: extractProperties('Ingredient'),
+            measure: extractProperties('Measure'),
+            instructions: recipeDetails[0].strInstructions,
+          } }
+        />
+      }
+      {
+        carouselDetails.length && <CarouselCard
+          recipeDetails={ {
+            name: carouselDetails[0].strMeal,
+            image: carouselDetails[0].strMealThumb,
+            category: carouselDetails[0].strCategory,
+          } }
+        />
+      }
+      <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
+    </div>
   );
 }
 

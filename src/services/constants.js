@@ -17,6 +17,7 @@ export const URLS = {
     randomRecipe: 'https://www.themealdb.com/api/json/v1/1/random.php',
     detailById: (id) => `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
   },
+
   drinks: {
     ingredient: (ingredient) => (`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`),
     name: (nome) => (`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${nome}`),

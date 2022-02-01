@@ -56,7 +56,6 @@ function DetailsCard({ recipeDetails }) {
       />}
       <h2>Recommended</h2>
       <span data-testid="0-recomendation-card">Receitas recomendadas</span>
-      <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
     </section>);
 }
 

@@ -19,17 +19,22 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
   }, [id]);
 
   return (
-    recipeDetails.length && <DetailsCard
-      recipeDetails={ {
-        name: recipeDetails[0].strMeal,
-        image: recipeDetails[0].strMealThumb,
-        category: recipeDetails[0].strCategory,
-        ingredients: extractProperties('Ingredient'),
-        measure: extractProperties('Measure'),
-        instructions: recipeDetails[0].strInstructions,
-        video: recipeDetails[0].strYoutube,
-      } }
-    />
+    <div>
+      {
+        recipeDetails.length && <DetailsCard
+          recipeDetails={ {
+            name: recipeDetails[0].strMeal,
+            image: recipeDetails[0].strMealThumb,
+            category: recipeDetails[0].strCategory,
+            ingredients: extractProperties('Ingredient'),
+            measure: extractProperties('Measure'),
+            instructions: recipeDetails[0].strInstructions,
+            video: recipeDetails[0].strYoutube,
+          } }
+        />
+      }
+      <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
+    </div>
   );
 }
 
