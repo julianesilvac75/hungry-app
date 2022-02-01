@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DetailsCard from '../components/DetailsCard';
 import fetchAPI from '../services/api';
 import { URLS } from '../services/constants';
 import CarouselCard from '../components/CarouselCard';
+import AppRecipesContext from '../context/AppRecipesContext';
 
 function DetalhesDeComidas({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [carouselDetails, setCarouselDetails] = useState([]);
+  const { doneRecipes } = useContext(AppRecipesContext);
 
   function extractProperties(key) {
     return Object.entries(recipeDetails[0])
@@ -15,8 +17,9 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
   }
 
   useEffect(() => {
-    const URL = URLS.foods.detailById;
-    fetchAPI(URL(id), (data) => setRecipeDetails(data.meals));
+    const URL = URLS.foods.detailById(id);
+    console.log(URL);
+    fetchAPI(URL, (data) => setRecipeDetails(data.meals));
   }, [id]);
 
   useEffect(() => {
@@ -37,7 +40,7 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
   return (
     <div>
       {
-        recipeDetails.length && <DetailsCard
+        recipeDetails.length > 0 && <DetailsCard
           recipeDetails={ {
             name: recipeDetails[0].strMeal,
             image: recipeDetails[0].strMealThumb,
@@ -56,7 +59,19 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
         />
       }
 
-      <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
+      {
+        !doneRecipes.some((recipe) => recipe.id === id) && (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            style={ { position: 'fixed', bottom: '0' } }
+          >
+            Start Recipe
+
+          </button>
+        )
+      }
+
     </div>
   );
 }

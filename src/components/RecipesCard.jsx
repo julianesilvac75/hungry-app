@@ -4,10 +4,9 @@ import { useLocation, Link } from 'react-router-dom';
 
 function RecipesCard({ index, url, name, id }) {
   const { pathname } = useLocation();
-
   return (
-    <Link to={ `${pathname}/${id}` }>
-      <section data-testid={ `${index}-recipe-card` } style={ { width: '100px' } }>
+    <Link to={ `${pathname}/${id}` } data-testid={ `${index}-recipe-card` }>
+      <section style={ { width: '100px' } }>
         <img
           src={ url }
           alt={ name }
