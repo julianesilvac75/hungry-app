@@ -63,6 +63,7 @@ function App() {
         <Route exact path="/done-recipes" component={ ReceitasFeitas } />
         <Route exact path="/favorite-recipes" component={ ReceitasFavoritas } />
         <Route exact path="/explore/drinks/nationalities" component={ NotFound } />
+        <Route path="*" component={ NotFound } />
       </Switch>
     </div>
   );
