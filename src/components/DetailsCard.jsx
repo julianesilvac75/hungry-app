@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 // import AppRecipesContext from '../context/AppRecipesContext';
 
 const copy = require('clipboard-copy');
@@ -15,10 +16,12 @@ function DetailsCard({ recipeDetails }) {
     measure,
     instructions,
     video,
+    alcoholic,
   } = recipeDetails;
 
+  const { pathname } = useLocation();
   // const { favoriteRecipes, setFavoriteRecipes } = useContext(AppRecipesContext);
-
+  const [favorite, setFavorite] = useState(false);
   const [link, setLink] = useState(false);
 
   return (
@@ -53,17 +56,23 @@ function DetailsCard({ recipeDetails }) {
       {link && <p>Link copied!</p>}
 
       <button
-        src={ whiteHeartIcon }
+        src={ favorite ? blackHeartIcon : whiteHeartIcon }
         data-testid="favorite-btn"
         type="button"
+        onClick={ () => setFavorite((prevState) => !prevState) }
       >
         <img
           alt="Favorite Icon"
-          src={ whiteHeartIcon }
+          src={ favorite ? blackHeartIcon : whiteHeartIcon }
         />
       </button>
 
-      <p data-testid="recipe-category">{category}</p>
+      <p
+        data-testid="recipe-category"
+      >
+        {pathname.includes('drink') ? alcoholic : category}
+
+      </p>
       <h2>Ingredients</h2>
       <ul>
         { ingredients.map((ingredient, index) => (
@@ -96,6 +105,7 @@ DetailsCard.propTypes = {
     video: PropTypes.string,
     ingredients: PropTypes.arrayOf(PropTypes.array),
     measure: PropTypes.arrayOf(PropTypes.array),
+    alcoholic: PropTypes.string.isRequired,
   }).isRequired,
 };
 

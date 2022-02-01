@@ -56,6 +56,7 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
             id: recipeDetails[0].idMeal,
             nationality: recipeDetails[0].strArea,
             type: 'comida',
+            alcoholic: '',
           } }
         />
       }

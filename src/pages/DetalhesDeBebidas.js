@@ -46,10 +46,14 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
           recipeDetails={ {
             name: recipeDetails[0].strDrink,
             image: recipeDetails[0].strDrinkThumb,
-            category: recipeDetails[0].strAlcoholic,
+            category: recipeDetails[0].strCategory,
             ingredients: extractProperties('Ingredient'),
             measure: extractProperties('Measure'),
             instructions: recipeDetails[0].strInstructions,
+            id: recipeDetails[0].idDrink,
+            nationality: recipeDetails[0].strArea,
+            type: 'bebida',
+            alcoholic: recipeDetails[0].strAlcoholic,
           } }
         />
       }
