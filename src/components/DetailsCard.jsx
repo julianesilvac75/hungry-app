@@ -24,7 +24,6 @@ function DetailsCard({ recipeDetails }) {
 
   const { pathname } = useLocation();
   const {
-    // favoriteRecipes,
     setFavoriteRecipes,
     verifyFavorite } = useContext(AppRecipesContext);
   const [link, setLink] = useState(false);
