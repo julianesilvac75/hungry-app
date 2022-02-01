@@ -24,6 +24,16 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
     fetchAPI(URL, (data) => setCarouselDetails(data.meals));
   }, []);
 
+  function objFromCarouselDetails() {
+    return carouselDetails.map(({ strMeal, strCategory, strMealThumb }) => (
+      {
+        name: strMeal,
+        category: strCategory,
+        image: strMealThumb,
+      }
+    ));
+  }
+
   return (
     <div>
       {
@@ -40,13 +50,10 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
       }
       {
         carouselDetails.length && <CarouselCard
-          recipeDetails={ {
-            name: carouselDetails[0].strMeal,
-            image: carouselDetails[0].strMealThumb,
-            category: carouselDetails[0].strCategory,
-          } }
+          recipeDetails={ objFromCarouselDetails() }
         />
       }
+
       <button type="button" data-testid="start-recipe-btn">Start Recipe</button>
     </div>
   );
