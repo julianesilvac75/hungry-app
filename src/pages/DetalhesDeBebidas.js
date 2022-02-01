@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import DetailsCard from '../components/DetailsCard';
 import CarouselCard from '../components/CarouselCard';
 import fetchAPI from '../services/api';
@@ -10,6 +11,7 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [carouselDetails, setCarouselDetails] = useState([]);
   const { doneRecipes, inProgressRecipes } = useContext(AppRecipesContext);
+  const history = useHistory();
 
   function extractProperties(key) {
     return Object.entries(recipeDetails[0])
@@ -62,6 +64,7 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
             type="button"
             data-testid="start-recipe-btn"
             style={ { position: 'fixed', bottom: '0' } }
+            onClick={ () => history.push(`/drinks/${id}/in-progress`) }
           >
             {
               Object.keys(inProgressRecipes.cocktails)
