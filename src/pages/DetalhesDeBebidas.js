@@ -9,7 +9,7 @@ import AppRecipesContext from '../context/AppRecipesContext';
 function DetalhesDeBebidas({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [carouselDetails, setCarouselDetails] = useState([]);
-  const { doneRecipes } = useContext(AppRecipesContext);
+  const { doneRecipes, inProgressRecipes } = useContext(AppRecipesContext);
 
   function extractProperties(key) {
     return Object.entries(recipeDetails[0])
@@ -63,7 +63,10 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
             data-testid="start-recipe-btn"
             style={ { position: 'fixed', bottom: '0' } }
           >
-            Start Recipe
+            {
+              Object.keys(inProgressRecipes.cocktails)
+                .some((key) => (key === id)) ? 'Continue Recipe' : 'Start Recipe'
+            }
 
           </button>
         )

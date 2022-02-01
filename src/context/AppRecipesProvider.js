@@ -9,7 +9,12 @@ const AppRecipesProvider = ({ children }) => {
   const [cocktailsToken, setCocktailsToken] = useLocalStorage('cocktailsToken', '');
   const [userToken, setUserToken] = useLocalStorage('user', {});
   const [doneRecipes, setDoneRecipes] = useLocalStorage('doneRecipes', []);
-
+  const [
+    inProgressRecipes, setInProgressRecipes,
+  ] = useLocalStorage('inProgressRecipes', {
+    cocktails: {},
+    meals: { 52977: '' },
+  });
   const valueContext = {
     setMealsToken,
     setCocktailsToken,
@@ -19,6 +24,8 @@ const AppRecipesProvider = ({ children }) => {
     userToken,
     doneRecipes,
     setDoneRecipes,
+    inProgressRecipes,
+    setInProgressRecipes,
   };
 
   return (
