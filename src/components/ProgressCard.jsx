@@ -14,15 +14,33 @@ function ProgressCard({ progressRecipe }) {
     inProgressRecipes,
     saveUsedIgredients,
     saveFavorites,
+    setDoneRecipes,
   } = useContext(AppRecipesContext);
   const history = useHistory();
 
   const { name,
     image, ingredients, type, nationality,
-    instructions, id, category, measure, alcoholicOrNot } = progressRecipe;
+    instructions, id, category, measure, alcoholicOrNot, tags } = progressRecipe;
 
   const { pathname } = useLocation();
   const [link, setLink] = useState(false);
+
+  function finishRecipes() {
+    const doneRecipes = {
+      id,
+      type,
+      nationality,
+      category,
+      alcoholicOrNot,
+      name,
+      image,
+      // Ref: https://pt.stackoverflow.com/questions/6526/como-formatar-data-no-javascript
+      doneDate: new Date().toLocaleDateString(),
+      tags,
+    };
+    setDoneRecipes((prevState) => ([...prevState, doneRecipes]));
+    history.push('/done-recipes');
+  }
 
   const handleFavoriteButton = () => {
     const newRecipe = { id,
@@ -136,7 +154,7 @@ function ProgressCard({ progressRecipe }) {
       <button
         type="button"
         data-testid="finish-recipe-btn"
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ finishRecipes }
         disabled={ !validateBtn() }
       >
         Finish Recipe
@@ -157,6 +175,7 @@ ProgressCard.propTypes = {
     ingredients: PropTypes.arrayOf(PropTypes.array),
     measure: PropTypes.arrayOf(PropTypes.array),
     alcoholicOrNot: PropTypes.string,
+    tags: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   }).isRequired,
 };
 
