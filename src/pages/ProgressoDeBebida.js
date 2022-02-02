@@ -26,6 +26,7 @@ function ProgressoDeBebida({ match: { params: { id } } }) {
       nationality: '',
       type: 'drink',
       alcoholicOrNot: recipeDetails[0].strAlcoholic,
+      tags: '',
     };
   }
 
