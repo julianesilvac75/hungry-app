@@ -20,7 +20,7 @@ function DoneFavRecipeCard(props) {
   return (
     <section>
 
-      <Link to={ `/foods/${id}` }>
+      <Link to={ `/${type === 'food' ? 'foods' : 'drinks'}/${id}` }>
         <img
           data-testid={ `${index}-horizontal-image` }
           src={ image }
@@ -30,23 +30,18 @@ function DoneFavRecipeCard(props) {
       </Link>
 
       <p data-testid={ `${index}-horizontal-top-text` }>
-        {type === 'food' ? `${nationality}-${category}` : alcoholicOrNot}
+        {type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot}
       </p>
 
-      <Link
-        to={ `/foods/${id}` }
-        data-testid={ `${index}-horizontal-name` }
-      >
-        {name}
-      </Link>
+      <p data-testid={ `${index}-horizontal-name` }>{name}</p>
 
       <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
 
       <button
         type="button"
-        data-testid={ `${index}-horizontal-share-btn` }
       >
         <img
+          data-testid={ `${index}-horizontal-share-btn` }
           src={ shareIcon }
           alt="Share Icon"
         />
