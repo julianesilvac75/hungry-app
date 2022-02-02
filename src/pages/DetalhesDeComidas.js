@@ -8,10 +8,13 @@ import CarouselCard from '../components/CarouselCard';
 import AppRecipesContext from '../context/AppRecipesContext';
 
 function DetalhesDeComidas({ match: { params: { id } } }) {
-  const [recipeDetails, setRecipeDetails] = useState([]);
+  const { doneRecipes, inProgressRecipes, startFoods } = useContext(AppRecipesContext);
+  const [recipeDetails, setRecipeDetails] = useState(() => (
+    startFoods.filter((food) => food.idMeal === id)
+  ));
   const [carouselDetails, setCarouselDetails] = useState([]);
-  const { doneRecipes, inProgressRecipes } = useContext(AppRecipesContext);
   const history = useHistory();
+  console.log(startFoods);
 
   function extractProperties(key) {
     return Object.entries(recipeDetails[0])
@@ -19,10 +22,12 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
   }
 
   useEffect(() => {
-    const URL = URLS.foods.detailById(id);
-    console.log(URL);
-    fetchAPI(URL, (data) => setRecipeDetails(data.meals));
-  }, [id]);
+    if (recipeDetails.length === 0) {
+      const URL = URLS.foods.detailById(id);
+      console.log(URL);
+      fetchAPI(URL, (data) => setRecipeDetails(data.meals));
+    }
+  }, [id, recipeDetails.length]);
 
   useEffect(() => {
     const URL = URLS.drinks.default;

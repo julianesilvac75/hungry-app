@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AppRecipesContext from './AppRecipesContext';
 import useLocalStorage from '../hooks/useLocalStorage';
+import { URLS } from '../services/constants';
+import fetchAPI from '../services/api';
 
 const AppRecipesProvider = ({ children }) => {
   // const [saveEmail, setSaveEmail] = useLocalStorage()
@@ -18,6 +20,11 @@ const AppRecipesProvider = ({ children }) => {
   const [
     favoriteRecipes, setFavoriteRecipes,
   ] = useLocalStorage('favoriteRecipes', []);
+  const [startFoods, setStartFoods] = useState([]);
+
+  useEffect(() => {
+    fetchAPI(URLS.foods.default, (data) => setStartFoods(data.meals));
+  }, []);
 
   const verifyFavorite = (id) => favoriteRecipes.some((recipe) => recipe.id === id);
 
@@ -35,6 +42,7 @@ const AppRecipesProvider = ({ children }) => {
     favoriteRecipes,
     setFavoriteRecipes,
     verifyFavorite,
+    startFoods,
   };
 
   return (
