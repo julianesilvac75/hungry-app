@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { URLS, TWELVE, FIVE } from '../services/constants';
 import RecipesCard from '../components/RecipesCard';
 import fetchAPI from '../services/api';
+import AppRecipesContext from '../context/AppRecipesContext';
 
 function ReceitasDeComidas() {
-  const [recipes, setRecipes] = useState([]);
+  const { startFoods } = useContext(AppRecipesContext);
+  console.log(startFoods);
+  const [recipes, setRecipes] = useState(startFoods);
   const [categories, setCategories] = useState([]);
   const [recipesFiltered, setRecipesFiltered] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
+
+  useEffect(() => {
+    setRecipes(startFoods);
+  }, [startFoods]);
 
   const getRecipesFromApi = (data) => {
     if (data.meals === null) {
@@ -20,7 +27,6 @@ function ReceitasDeComidas() {
   };
 
   useEffect(() => {
-    fetchAPI(URLS.foods.default, getRecipesFromApi);
     fetchAPI(URLS.foods.category, (data) => setCategories(data.meals));
   }, []);
 
