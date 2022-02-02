@@ -17,7 +17,7 @@ function ProgressCard({ progressRecipe }) {
   } = useContext(AppRecipesContext);
 
   const { name,
-    image, ingredients, type,
+    image, ingredients, type, nationality,
     instructions, id, category, measure, alcoholicOrNot } = progressRecipe;
 
   const { pathname } = useLocation();
@@ -77,7 +77,7 @@ function ProgressCard({ progressRecipe }) {
         type="button"
         data-testid="share-btn"
         onClick={ () => {
-          copy(window.location.href);
+          copy((window.location.href).split('/in')[0]);
           setLink(true);
         } }
       >
@@ -141,7 +141,6 @@ function ProgressCard({ progressRecipe }) {
         data-testid="finish-recipe-btn"
       >
         Finish Recipe
-
       </button>
     </section>);
 }
