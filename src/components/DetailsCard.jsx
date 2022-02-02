@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import AppRecipesContext from '../context/AppRecipesContext';
+
+const copy = require('clipboard-copy');
 
 function DetailsCard({ recipeDetails }) {
   const { name,
@@ -11,7 +16,34 @@ function DetailsCard({ recipeDetails }) {
     measure,
     instructions,
     video,
+    alcoholicOrNot,
+    id,
+    type,
+    nationality,
   } = recipeDetails;
+
+  const { pathname } = useLocation();
+  const {
+    setFavoriteRecipes,
+    verifyFavorite } = useContext(AppRecipesContext);
+  const [link, setLink] = useState(false);
+
+  const handleFavoriteButton = () => {
+    const newRecipe = { id,
+      type,
+      nationality,
+      category,
+      alcoholicOrNot,
+      name,
+      image };
+
+    if (!verifyFavorite(id)) {
+      return setFavoriteRecipes((prevState) => [...prevState, newRecipe]);
+    }
+
+    return setFavoriteRecipes((prevState) => (
+      prevState.filter((recipe) => recipe.id !== id)));
+  };
 
   return (
     <section>
@@ -26,23 +58,48 @@ function DetailsCard({ recipeDetails }) {
       >
         {name}
       </h1>
-      <img
-        alt="Share Icon"
+      <button
         src={ shareIcon }
+        type="button"
         data-testid="share-btn"
-      />
-      <img
-        alt="Favorite Icon"
-        src={ whiteHeartIcon }
+        onClick={ () => {
+          copy(window.location.href);
+          setLink(true);
+        } }
+      >
+        <img
+          alt="Share Icon"
+          src={ shareIcon }
+        />
+
+      </button>
+
+      {link && <p>Link copied!</p>}
+
+      <button
+        src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
         data-testid="favorite-btn"
-      />
-      <p data-testid="recipe-category">{category}</p>
+        type="button"
+        onClick={ handleFavoriteButton }
+      >
+        <img
+          alt="Favorite Icon"
+          src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
+        />
+      </button>
+
+      <p
+        data-testid="recipe-category"
+      >
+        {pathname.includes('drink') ? alcoholicOrNot : category}
+
+      </p>
       <h2>Ingredients</h2>
       <ul>
         { ingredients.map((ingredient, index) => (
           <li
             data-testid={ `${index}-ingredient-name-and-measure` }
-            key={ ingredient[1] }
+            key={ `${ingredient[1]} - ${index}` }
           >
             { `${ingredient[1]} - ${measure[index] === undefined
               ? '' : measure[index][1]}`}
@@ -67,8 +124,12 @@ DetailsCard.propTypes = {
     category: PropTypes.string,
     instructions: PropTypes.string,
     video: PropTypes.string,
+    id: PropTypes.string,
+    nationality: PropTypes.string,
+    type: PropTypes.string,
     ingredients: PropTypes.arrayOf(PropTypes.array),
     measure: PropTypes.arrayOf(PropTypes.array),
+    alcoholicOrNot: PropTypes.string,
   }).isRequired,
 };
 

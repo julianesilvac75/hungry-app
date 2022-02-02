@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import DetailsCard from '../components/DetailsCard';
 import CarouselCard from '../components/CarouselCard';
 import fetchAPI from '../services/api';
@@ -9,11 +10,13 @@ import AppRecipesContext from '../context/AppRecipesContext';
 function DetalhesDeBebidas({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [carouselDetails, setCarouselDetails] = useState([]);
-  const { doneRecipes } = useContext(AppRecipesContext);
+  const { doneRecipes, inProgressRecipes } = useContext(AppRecipesContext);
+  const history = useHistory();
 
   function extractProperties(key) {
     return Object.entries(recipeDetails[0])
-      .filter((entry) => entry[0].includes(key) && entry[1] !== null);
+      .filter((entry) => entry[0]
+        .includes(key) && (entry[1] !== '' && entry[1] !== ' ' && entry[1] !== null));
   }
 
   useEffect(() => {
@@ -36,6 +39,7 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
     ));
   }
 
+  console.log(recipeDetails);
   return (
     <div>
       {
@@ -43,10 +47,14 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
           recipeDetails={ {
             name: recipeDetails[0].strDrink,
             image: recipeDetails[0].strDrinkThumb,
-            category: recipeDetails[0].strAlcoholic,
+            category: recipeDetails[0].strCategory,
             ingredients: extractProperties('Ingredient'),
             measure: extractProperties('Measure'),
             instructions: recipeDetails[0].strInstructions,
+            id: recipeDetails[0].idDrink,
+            nationality: '',
+            type: 'drink',
+            alcoholicOrNot: recipeDetails[0].strAlcoholic,
           } }
         />
       }
@@ -62,8 +70,12 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
             type="button"
             data-testid="start-recipe-btn"
             style={ { position: 'fixed', bottom: '0' } }
+            onClick={ () => history.push(`/drinks/${id}/in-progress`) }
           >
-            Start Recipe
+            {
+              Object.keys(inProgressRecipes.cocktails)
+                .some((key) => (key === id)) ? 'Continue Recipe' : 'Start Recipe'
+            }
 
           </button>
         )
