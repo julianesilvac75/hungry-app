@@ -14,7 +14,6 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
   ));
   const [carouselDetails, setCarouselDetails] = useState([]);
   const history = useHistory();
-  console.log(startFoods);
 
   function extractProperties(key) {
     return Object.entries(recipeDetails[0])
@@ -24,7 +23,6 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
   useEffect(() => {
     if (recipeDetails.length === 0) {
       const URL = URLS.foods.detailById(id);
-      console.log(URL);
       fetchAPI(URL, (data) => setRecipeDetails(data.meals));
     }
   }, [id, recipeDetails.length]);
@@ -43,8 +41,6 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
       }
     ));
   }
-
-  console.log(recipeDetails);
 
   return (
     <div>
