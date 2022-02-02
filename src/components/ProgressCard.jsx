@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -10,11 +10,12 @@ const copy = require('clipboard-copy');
 
 function ProgressCard({ progressRecipe }) {
   const {
-    setFavoriteRecipes,
     verifyFavorite,
     inProgressRecipes,
-    setInProgressRecipes,
+    saveUsedIgredients,
+    saveFavorites,
   } = useContext(AppRecipesContext);
+  const history = useHistory();
 
   const { name,
     image, ingredients, type, nationality,
@@ -32,29 +33,24 @@ function ProgressCard({ progressRecipe }) {
       name,
       image };
 
-    if (!verifyFavorite(id)) {
-      return setFavoriteRecipes((prevState) => [...prevState, newRecipe]);
-    }
-
-    return setFavoriteRecipes((prevState) => (
-      prevState.filter((recipe) => recipe.id !== id)));
+    return saveFavorites(id, newRecipe);
   };
 
   function whichType() {
     return type === 'food' ? 'meals' : 'cocktails';
   }
 
-  function saveUsedIgredients(value) {
-    const arrId = inProgressRecipes[whichType()][id] || [];
-    const newObj = { ...inProgressRecipes,
-      [whichType()]: { [id]: [...arrId, value] } };
-    return setInProgressRecipes(newObj);
-  }
-
   function checkIngredients(value) {
     if (inProgressRecipes[whichType()][id]) {
       return inProgressRecipes[whichType()][id]
         .some((item) => item === value);
+    }
+    return false;
+  }
+
+  function validateBtn() {
+    if (inProgressRecipes[whichType()][id]) {
+      return inProgressRecipes[whichType()][id].length === ingredients.length;
     }
     return false;
   }
@@ -122,7 +118,7 @@ function ProgressCard({ progressRecipe }) {
               style={ checkIngredients(value) ? { textDecoration: 'line-through' } : {} }
             >
               <input
-                onChange={ () => saveUsedIgredients(value) }
+                onChange={ () => saveUsedIgredients(whichType, value, id) }
                 value={ value }
                 type="checkbox"
                 id={ ingredient[1] }
@@ -136,9 +132,12 @@ function ProgressCard({ progressRecipe }) {
 
       <h2>Instructions</h2>
       <p data-testid="instructions">{ instructions }</p>
+
       <button
         type="button"
         data-testid="finish-recipe-btn"
+        onClick={ () => history.push('/done-recipes') }
+        disabled={ !validateBtn() }
       >
         Finish Recipe
       </button>
