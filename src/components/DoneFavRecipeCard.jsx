@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
+const copy = require('clipboard-copy');
+
 function DoneFavRecipeCard(props) {
+  const [link, setLink] = useState(false);
   const { image,
     index,
     alcoholicOrNot,
@@ -15,7 +18,10 @@ function DoneFavRecipeCard(props) {
     nationality,
     name } = props;
 
-  console.log(tags);
+  function urlLocation() {
+    const { protocol, host } = window.location;
+    return (`${protocol}//${host}/${type === 'food' ? 'foods' : 'drinks'}/${id}`);
+  }
 
   return (
     <section>
@@ -32,13 +38,21 @@ function DoneFavRecipeCard(props) {
       <p data-testid={ `${index}-horizontal-top-text` }>
         {type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot}
       </p>
-
-      <p data-testid={ `${index}-horizontal-name` }>{name}</p>
+      <Link
+        to={ `/${type === 'food' ? 'foods' : 'drinks'}/${id}` }
+        data-testid={ `${index}-horizontal-name` }
+      >
+        {name}
+      </Link>
 
       <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
 
       <button
         type="button"
+        onClick={ () => {
+          copy(urlLocation());
+          setLink(true);
+        } }
       >
         <img
           data-testid={ `${index}-horizontal-share-btn` }
@@ -46,6 +60,7 @@ function DoneFavRecipeCard(props) {
           alt="Share Icon"
         />
       </button>
+      { link && <p>Link copied!</p> }
 
       { tags.map((tag) => (
         <button
