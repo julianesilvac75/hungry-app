@@ -62,7 +62,7 @@ function DoneFavRecipeCard(props) {
       </button>
       { link && <p>Link copied!</p> }
 
-      { tags.map((tag) => (
+      {tags !== '' && tags.map((tag) => (
         <button
           key={ tag }
           type="button"
