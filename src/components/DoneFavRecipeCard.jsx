@@ -1,28 +1,46 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
-const index = 1;
-const tagName = 1;
+function DoneFavRecipeCard(props) {
+  const { image,
+    index,
+    alcoholicOrNot,
+    category,
+    id,
+    doneDate,
+    tags,
+    type,
+    nationality,
+    name } = props;
 
-function DoneFavRecipeCard() {
+  console.log(tags);
+
   return (
     <section>
 
-      <Link to="/foods/{id-da-receita}">
-        <img data-testid={ `${index}-horizontal-image` } src="" alt="" />
+      <Link to={ `/foods/${id}` }>
+        <img
+          data-testid={ `${index}-horizontal-image` }
+          src={ image }
+          alt={ name }
+          style={ { width: '100px' } }
+        />
       </Link>
 
-      <p data-testid={ `${index}-horizontal-top-text` }>Index</p>
+      <p data-testid={ `${index}-horizontal-top-text` }>
+        {type === 'food' ? `${nationality}-${category}` : alcoholicOrNot}
+      </p>
 
       <Link
-        to="/foods/{id-da-receita}"
+        to={ `/foods/${id}` }
         data-testid={ `${index}-horizontal-name` }
       >
-        Nome
+        {name}
       </Link>
 
-      <p data-testid={ `${index}-horizontal-done-date` }>Data</p>
+      <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
 
       <button
         type="button"
@@ -34,15 +52,31 @@ function DoneFavRecipeCard() {
         />
       </button>
 
-      <button
-        type="button"
-        data-testid={ `${index}-${tagName}-horizontal-tag` }
-      >
-        Tag
-      </button>
+      { tags.map((tag) => (
+        <button
+          key={ tag }
+          type="button"
+          data-testid={ `${index}-${tag}-horizontal-tag` }
+        >
+          { tag }
+        </button>
+      ))}
 
     </section>
   );
 }
+
+DoneFavRecipeCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  nationality: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  alcoholicOrNot: PropTypes.string.isRequired,
+  tags: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  doneDate: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default DoneFavRecipeCard;
