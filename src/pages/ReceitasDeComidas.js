@@ -9,7 +9,6 @@ import AppRecipesContext from '../context/AppRecipesContext';
 
 function ReceitasDeComidas() {
   const { startFoods } = useContext(AppRecipesContext);
-  console.log(startFoods);
   const [recipes, setRecipes] = useState(startFoods);
   const [categories, setCategories] = useState([]);
   const [recipesFiltered, setRecipesFiltered] = useState([]);

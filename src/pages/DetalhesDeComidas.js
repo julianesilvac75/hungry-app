@@ -8,7 +8,12 @@ import CarouselCard from '../components/CarouselCard';
 import AppRecipesContext from '../context/AppRecipesContext';
 
 function DetalhesDeComidas({ match: { params: { id } } }) {
-  const { doneRecipes, inProgressRecipes, startFoods } = useContext(AppRecipesContext);
+  const {
+    doneRecipes,
+    inProgressRecipes,
+    startFoods,
+    setProgressCardInfo,
+  } = useContext(AppRecipesContext);
   const [recipeDetails, setRecipeDetails] = useState(() => (
     startFoods.filter((food) => food.idMeal === id)
   ));
@@ -42,23 +47,27 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
     ));
   }
 
+  function settingPropsDetails() {
+    return {
+      name: recipeDetails[0].strMeal,
+      image: recipeDetails[0].strMealThumb,
+      category: recipeDetails[0].strCategory,
+      ingredients: extractProperties('Ingredient'),
+      measure: extractProperties('Measure'),
+      instructions: recipeDetails[0].strInstructions,
+      video: recipeDetails[0].strYoutube,
+      id: recipeDetails[0].idMeal,
+      nationality: recipeDetails[0].strArea,
+      type: 'food',
+      alcoholicOrNot: '',
+    };
+  }
+
   return (
     <div>
       {
         recipeDetails.length > 0 && <DetailsCard
-          recipeDetails={ {
-            name: recipeDetails[0].strMeal,
-            image: recipeDetails[0].strMealThumb,
-            category: recipeDetails[0].strCategory,
-            ingredients: extractProperties('Ingredient'),
-            measure: extractProperties('Measure'),
-            instructions: recipeDetails[0].strInstructions,
-            video: recipeDetails[0].strYoutube,
-            id: recipeDetails[0].idMeal,
-            nationality: recipeDetails[0].strArea,
-            type: 'food',
-            alcoholicOrNot: '',
-          } }
+          recipeDetails={ settingPropsDetails() }
         />
       }
 
@@ -74,7 +83,10 @@ function DetalhesDeComidas({ match: { params: { id } } }) {
             type="button"
             data-testid="start-recipe-btn"
             style={ { position: 'fixed', bottom: '0' } }
-            onClick={ () => history.push(`/foods/${id}/in-progress`) }
+            onClick={ () => {
+              setProgressCardInfo(settingPropsDetails());
+              history.push(`/foods/${id}/in-progress`);
+            } }
           >
             {
               Object.keys(inProgressRecipes.meals)

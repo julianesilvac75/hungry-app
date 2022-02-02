@@ -99,7 +99,7 @@ function DetailsCard({ recipeDetails }) {
         { ingredients.map((ingredient, index) => (
           <li
             data-testid={ `${index}-ingredient-name-and-measure` }
-            key={ ingredient[1] }
+            key={ `${ingredient[1]} - ${index}` }
           >
             { `${ingredient[1]} - ${measure[index] === undefined
               ? '' : measure[index][1]}`}
