@@ -51,7 +51,11 @@ function Header({ titleHeader, isVisible = true, getRecipesFromApi }) {
 Header.propTypes = {
   titleHeader: PropTypes.string.isRequired,
   isVisible: PropTypes.bool.isRequired,
+<<<<<<< HEAD
+  getRecipesFromApi: PropTypes.func,
+=======
   getRecipesFromApi: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+>>>>>>> 767adc98dd43d1abf83bee49d57b6238ee7d877b
 };
 
 Header.defaultProps = { getRecipesFromApi: '' };
