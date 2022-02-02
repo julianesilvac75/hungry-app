@@ -27,6 +27,7 @@ function ProgressoDeComida({ match: { params: { id } } }) {
       nationality: recipeDetails[0].strArea,
       type: 'food',
       alcoholicOrNot: '',
+      tags: recipeDetails[0].strTags.split(','),
     };
   }
 
