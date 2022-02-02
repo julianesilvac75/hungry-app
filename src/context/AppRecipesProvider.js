@@ -21,12 +21,33 @@ const AppRecipesProvider = ({ children }) => {
     favoriteRecipes, setFavoriteRecipes,
   ] = useLocalStorage('favoriteRecipes', []);
   const [startFoods, setStartFoods] = useState([]);
+  const [progressCardInfo, setProgressCardInfo] = useState({});
 
   useEffect(() => {
     fetchAPI(URLS.foods.default, (data) => setStartFoods(data.meals));
   }, []);
 
   const verifyFavorite = (id) => favoriteRecipes.some((recipe) => recipe.id === id);
+
+  function saveUsedIgredients(type, value, id) {
+    const arrId = inProgressRecipes[type()][id] || [];
+    if (arrId.some((item) => item === value)) {
+      const newObj = { ...inProgressRecipes,
+        [type()]: { [id]: arrId.filter((item) => item !== value) } };
+      return setInProgressRecipes(newObj);
+    }
+    const newObj = { ...inProgressRecipes,
+      [type()]: { [id]: [...arrId, value] } };
+    return setInProgressRecipes(newObj);
+  }
+
+  function saveFavorites(id, newRecipe) {
+    if (!verifyFavorite(id)) {
+      return setFavoriteRecipes((prevState) => [...prevState, newRecipe]);
+    }
+    return setFavoriteRecipes((prevState) => (
+      prevState.filter((recipe) => recipe.id !== id)));
+  }
 
   const valueContext = {
     setMealsToken,
@@ -43,6 +64,10 @@ const AppRecipesProvider = ({ children }) => {
     setFavoriteRecipes,
     verifyFavorite,
     startFoods,
+    progressCardInfo,
+    setProgressCardInfo,
+    saveUsedIgredients,
+    saveFavorites,
   };
 
   return (
