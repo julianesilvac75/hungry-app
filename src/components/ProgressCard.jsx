@@ -10,15 +10,16 @@ const copy = require('clipboard-copy');
 
 function ProgressCard({ progressRecipe }) {
   const {
-    // progressCardInfo,
     setFavoriteRecipes,
     verifyFavorite,
+    inProgressRecipes,
+    setInProgressRecipes,
   } = useContext(AppRecipesContext);
 
   const { name,
-    image, ingredients,
+    image, ingredients, type,
     instructions, id, category, measure, alcoholicOrNot } = progressRecipe;
-  console.log(ingredients);
+
   const { pathname } = useLocation();
   const [link, setLink] = useState(false);
 
@@ -38,6 +39,25 @@ function ProgressCard({ progressRecipe }) {
     return setFavoriteRecipes((prevState) => (
       prevState.filter((recipe) => recipe.id !== id)));
   };
+
+  function whichType() {
+    return type === 'food' ? 'meals' : 'cocktails';
+  }
+
+  function saveUsedIgredients(value) {
+    const arrId = inProgressRecipes[whichType()][id] || [];
+    const newObj = { ...inProgressRecipes,
+      [whichType()]: { [id]: [...arrId, value] } };
+    return setInProgressRecipes(newObj);
+  }
+
+  function checkIngredients(value) {
+    if (inProgressRecipes[whichType()][id]) {
+      return inProgressRecipes[whichType()][id]
+        .some((item) => item === value);
+    }
+    return false;
+  }
 
   return (
     <section>
@@ -99,11 +119,14 @@ function ProgressCard({ progressRecipe }) {
               htmlFor={ ingredient[1] }
               key={ ingredient[1] }
               data-testid={ `${index}-ingredient-step` }
+              style={ checkIngredients(value) ? { textDecoration: 'line-through' } : {} }
             >
               <input
+                onChange={ () => saveUsedIgredients(value) }
                 value={ value }
                 type="checkbox"
                 id={ ingredient[1] }
+                checked={ checkIngredients(value) }
               />
               { value }
             </label>

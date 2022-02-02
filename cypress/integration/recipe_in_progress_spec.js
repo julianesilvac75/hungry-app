@@ -68,7 +68,7 @@ describe.only('48 - Desenvolva um checkbox para cada item da lista de ingredient
   });
 });
 
-describe('49 - Implemente uma lógica que, ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado" da lista', () => {
+describe.only('49 - Implemente uma lógica que, ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado" da lista', () => {
   const getIngredients = () => (
     cy.get('[data-testid*="ingredient-step"]')
       .find('input[type="checkbox"]')
@@ -103,7 +103,7 @@ describe('49 - Implemente uma lógica que, ao clicar no checkbox de um ingredien
   });
 });
 
-describe('50 - Salve o estado do progresso, que deve ser mantido caso a pessoa atualize a página ou volte para a mesma receita', () => {
+describe.only('50 - Salve o estado do progresso, que deve ser mantido caso a pessoa atualize a página ou volte para a mesma receita', () => {
   it('salva o progresso de uma receita de comida em andamento', () => {
     cy.visit('http://localhost:3000/foods/52771/in-progress', {
       onBeforeLoad(win) {

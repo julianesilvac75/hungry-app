@@ -15,7 +15,8 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
 
   function extractProperties(key) {
     return Object.entries(recipeDetails[0])
-      .filter((entry) => entry[0].includes(key) && (entry[1] !== '' && entry[1] !== ' '));
+      .filter((entry) => entry[0]
+        .includes(key) && (entry[1] !== '' && entry[1] !== ' ' && entry[1] !== null));
   }
 
   useEffect(() => {
