@@ -15,7 +15,7 @@ describe('Tela de Perfil', () => {
     localStorage.setItem('user', JSON.stringify({ email: 'alguem@email.com' }));
   });
 
-  it('Verifica os elementos da tela', async () => {
+  it('1-Verifica os elementos da tela', async () => {
     const { findByTestId } = renderWithRouter(<App />, '/profile');
 
     const userEmail = await findByTestId(USER_EMAIL);
@@ -29,7 +29,7 @@ describe('Tela de Perfil', () => {
     expect(logout).toBeInTheDocument();
   });
 
-  it('Verifica se ao clicar no Done Recipes vai para rota /done-recipes', async () => {
+  it('2-Verifica se ao clicar no Done Recipes vai para rota /done-recipes', async () => {
     const { getByTestId, findByTestId } = renderWithRouter(<App />, '/profile');
 
     const doneRecipeBtn = await findByTestId(DONE_RECIPES);
@@ -39,7 +39,7 @@ describe('Tela de Perfil', () => {
     expect(title).toContainHTML('Done Recipes');
   });
 
-  it('Verifica se ao clicar no Favorite Recipes vai para /favorite-recipes', async () => {
+  it('3-Verifica ao clicar no Favorite Recipes vai para /favorite-recipes', async () => {
     const { getByTestId, findByTestId } = renderWithRouter(<App />, '/profile');
 
     const favRecipeBtn = await findByTestId(FAV_RECIPES);
@@ -49,7 +49,7 @@ describe('Tela de Perfil', () => {
     expect(title).toContainHTML('Favorite Recipes');
   });
 
-  it('Verifica se ao clicar no botão Logout vai para tela Login', async () => {
+  it('4-Verifica se ao clicar no botão Logout vai para tela Login', async () => {
     const { findByTestId } = renderWithRouter(<App />, '/profile');
 
     const logout = await findByTestId(LOGOUT_BTN);
