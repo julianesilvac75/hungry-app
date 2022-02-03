@@ -6,7 +6,7 @@ import { SIX } from '../services/constants';
 function CarouselCard({ recipeDetails }) {
   return (
 
-    <div style={ { overflowX: 'scroll', display: 'flex', gap: '20px' } }>
+    <div style={ { overflowX: 'scroll', display: 'flex', gap: '30px', width: '100%' } }>
       {
         recipeDetails
           .filter((item, i) => i < SIX)

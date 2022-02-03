@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import AppRecipesContext from '../context/AppRecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
 function DoneFavRecipeCard(props) {
-  const { setFavoriteRecipes } = useContext(AppRecipesContext);
+  const { saveFavorites, verifyFavorite } = useContext(AppRecipesContext);
   const [link, setLink] = useState(false);
   const { image,
     index,
@@ -26,10 +27,17 @@ function DoneFavRecipeCard(props) {
     return (`${protocol}//${host}/${type === 'food' ? 'foods' : 'drinks'}/${id}`);
   }
 
-  function handleFavoriteButton() {
-    return setFavoriteRecipes((prevState) => (
-      prevState.filter((recipe) => recipe.id !== id)));
-  }
+  const handleFavoriteButton = () => {
+    const newRecipe = { id,
+      type,
+      nationality,
+      category,
+      alcoholicOrNot,
+      name,
+      image };
+
+    return saveFavorites(id, newRecipe);
+  };
 
   return (
     <section>
@@ -77,7 +85,7 @@ function DoneFavRecipeCard(props) {
       >
         <img
           data-testid={ `${index}-horizontal-favorite-btn` }
-          src={ blackHeartIcon }
+          src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
           alt="Favorite Icon"
         />
       </button>
