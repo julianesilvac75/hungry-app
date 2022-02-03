@@ -6,6 +6,7 @@ import renderWithRouter from './testConfig';
 const EMAIL_INPUT = 'email-input';
 const PASSWORD_INPUT = 'password-input';
 const BTN_LOGIN_SUBMIT = 'login-submit-btn';
+const TITLE = 'page-title';
 
 const VALID_EMAIL = 'alguem@email.com';
 const VALID_PASSWORD = '1234567';
@@ -68,7 +69,7 @@ describe('Login Page', () => {
     userEvent.type(password, VALID_PASSWORD);
 
     userEvent.click(loginSubmitBtn);
-    const recipes = getByTestId('page-title');
+    const recipes = getByTestId(TITLE);
     expect(recipes).toContainHTML('Foods');
   });
 });
