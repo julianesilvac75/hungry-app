@@ -6,8 +6,7 @@ import AppRecipesContext from '../context/AppRecipesContext';
 function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setMealsToken, setCocktailsToken,
-    setUserToken } = useContext(AppRecipesContext);
+  const { setMealsToken, setCocktailsToken } = useContext(AppRecipesContext);
 
   const validated = REGEX_EMAIL.test(email) && password.length > SIX;
 
@@ -15,7 +14,7 @@ function Login(props) {
     const { history } = props;
     setMealsToken(1);
     setCocktailsToken(1);
-    setUserToken({ email });
+    localStorage.setItem('user', JSON.stringify({ email }));
     history.push('./foods');
   };
 
