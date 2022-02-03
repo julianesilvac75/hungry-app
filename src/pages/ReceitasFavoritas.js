@@ -23,7 +23,7 @@ function ReceitasFavoritas() {
       <Header titleHeader="Favorite Recipes" isVisible={ false } />
       <FilterButtons setFilterButton={ setFilterButton } />
 
-      {filterRecipes().map((recipe, index) => (<DoneFavRecipeCard
+      { filterRecipes().map((recipe, index) => (<DoneFavRecipeCard
         key={ recipe.id }
         index={ index }
         { ...recipe }
