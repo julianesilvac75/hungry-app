@@ -8,11 +8,18 @@ import fetchAPI from '../services/api';
 import AppRecipesContext from '../context/AppRecipesContext';
 
 function ReceitasDeComidas() {
-  const { startFoods } = useContext(AppRecipesContext);
+  const { startFoods, ingredientFood } = useContext(AppRecipesContext);
   const [recipes, setRecipes] = useState(startFoods);
   const [categories, setCategories] = useState([]);
   const [recipesFiltered, setRecipesFiltered] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
+
+  useEffect(() => {
+    if (ingredientFood !== '') {
+      const URL = URLS.foods.ingredient(ingredientFood);
+      fetchAPI(URL, (data) => setRecipesFiltered(data.meals));
+    }
+  }, [ingredientFood]);
 
   useEffect(() => {
     setRecipes(startFoods);

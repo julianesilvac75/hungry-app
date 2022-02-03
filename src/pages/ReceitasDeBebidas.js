@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipesCard from '../components/RecipesCard';
 import { URLS, TWELVE, FIVE } from '../services/constants';
 import fetchAPI from '../services/api';
+import AppRecipesContext from '../context/AppRecipesContext';
 
 function ReceitasDeBebidas() {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [recipesFiltered, setRecipesFiltered] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
+  const { ingredientDrink } = useContext(AppRecipesContext);
+
+  useEffect(() => {
+    if (ingredientDrink !== '') {
+      const URL = URLS.drinks.ingredient(ingredientDrink);
+      fetchAPI(URL, (data) => setRecipesFiltered(data.drinks));
+    }
+  }, [ingredientDrink]);
 
   const getRecipesFromApi = (data) => {
     if (data.drinks === null) {

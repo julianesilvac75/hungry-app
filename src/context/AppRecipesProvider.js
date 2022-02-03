@@ -22,6 +22,8 @@ const AppRecipesProvider = ({ children }) => {
   ] = useLocalStorage('favoriteRecipes', []);
   const [startFoods, setStartFoods] = useState([]);
   const [progressCardInfo, setProgressCardInfo] = useState({});
+  const [ingredientFood, setIngredientFood] = useState('');
+  const [ingredientDrink, setIngredientDrink] = useState('');
 
   useEffect(() => {
     fetchAPI(URLS.foods.default, (data) => setStartFoods(data.meals));
@@ -68,6 +70,10 @@ const AppRecipesProvider = ({ children }) => {
     setProgressCardInfo,
     saveUsedIgredients,
     saveFavorites,
+    ingredientFood,
+    setIngredientFood,
+    ingredientDrink,
+    setIngredientDrink,
   };
 
   return (

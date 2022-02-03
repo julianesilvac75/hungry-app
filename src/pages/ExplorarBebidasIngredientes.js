@@ -12,8 +12,6 @@ function ExplorarBebidasIngredientes() {
     fetchAPI(URLS.drinks.ingredientList, (data) => setIngredients(data.drinks));
   }, []);
 
-  console.log(ingredients);
-
   return (
     <div>
       <Header titleHeader="Explore Ingredients" isVisible={ false } />
