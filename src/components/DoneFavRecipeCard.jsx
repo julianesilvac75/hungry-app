@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
@@ -36,16 +37,16 @@ function DoneFavRecipeCard(props) {
       </Link>
 
       <p data-testid={ `${index}-horizontal-top-text` }>
-        {type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot}
+        { type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot }
       </p>
       <Link
         to={ `/${type === 'food' ? 'foods' : 'drinks'}/${id}` }
         data-testid={ `${index}-horizontal-name` }
       >
-        {name}
+        { name }
       </Link>
 
-      <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
+      <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
 
       <button
         type="button"
@@ -60,9 +61,21 @@ function DoneFavRecipeCard(props) {
           alt="Share Icon"
         />
       </button>
+
       { link && <p>Link copied!</p> }
 
-      {tags !== '' && tags.map((tag) => (
+      <button
+        type="button"
+      // onClick={ }
+      >
+        <img
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          src={ blackHeartIcon }
+          alt="Favorite Icon"
+        />
+      </button>
+
+      { (tags !== '' && tags) && tags.map((tag) => (
         <button
           key={ tag }
           type="button"
@@ -70,7 +83,7 @@ function DoneFavRecipeCard(props) {
         >
           { tag }
         </button>
-      ))}
+      )) }
 
     </section>
   );
