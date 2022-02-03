@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import AppRecipesContext from '../context/AppRecipesContext';
 
 function Perfil() {
-  const { userToken: { email } } = useContext(AppRecipesContext);
+  let email = '';
+  if (localStorage.getItem('user')) {
+    email = JSON.parse(localStorage.getItem('user')).email;
+  }
   return (
     <div>
       <Header titleHeader="Profile" isVisible={ false } />

@@ -6,6 +6,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 function CarouselCard({ recipeDetails }) {
+  // ref: http://kenwheeler.github.io/slick/
+  // ref: https://react-slick.neostack.com/
   const settings = {
     infinite: false,
     slidesToShow: 2,
