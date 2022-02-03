@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import AppRecipesContext from '../context/AppRecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
 function DoneFavRecipeCard(props) {
+  const { setFavoriteRecipes } = useContext(AppRecipesContext);
   const [link, setLink] = useState(false);
   const { image,
     index,
@@ -22,6 +24,11 @@ function DoneFavRecipeCard(props) {
   function urlLocation() {
     const { protocol, host } = window.location;
     return (`${protocol}//${host}/${type === 'food' ? 'foods' : 'drinks'}/${id}`);
+  }
+
+  function handleFavoriteButton() {
+    return setFavoriteRecipes((prevState) => (
+      prevState.filter((recipe) => recipe.id !== id)));
   }
 
   return (
@@ -66,7 +73,7 @@ function DoneFavRecipeCard(props) {
 
       <button
         type="button"
-      // onClick={ }
+        onClick={ handleFavoriteButton }
       >
         <img
           data-testid={ `${index}-horizontal-favorite-btn` }
