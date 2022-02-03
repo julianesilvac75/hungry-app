@@ -1,7 +1,10 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { FaUserAlt } from 'react-icons/fa';
+import { RiLockPasswordFill } from 'react-icons/ri';
 import { REGEX_EMAIL, SIX } from '../services/constants';
 import AppRecipesContext from '../context/AppRecipesContext';
+import '../styles/Login.css';
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -20,42 +23,46 @@ function Login(props) {
   };
 
   return (
-    <form>
-      <label htmlFor="email">
-        Email:
-        {' '}
-        <input
-          type="text"
-          id="email"
-          value={ email }
-          data-testid="email-input"
-          name="email"
-          onChange={ (e) => setEmail(e.target.value) }
-        />
-      </label>
+    <section className="login-page">
+      <h1 className="login-title">HungryApp</h1>
+      <form className="login-form">
+        <div>
+          <FaUserAlt />
+          <input
+            type="text"
+            id="email"
+            value={ email }
+            data-testid="email-input"
+            placeholder="example@example.com"
+            name="email"
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+        </div>
+        <div>
+          <RiLockPasswordFill />
+          <input
+            type="password"
+            id="password"
+            value={ password }
+            data-testid="password-input"
+            name="password"
+            placeholder="Your password"
+            onChange={ (e) => setPassword(e.target.value) }
+          />
 
-      <label htmlFor="password">
-        Senha:
-        {' '}
-        <input
-          type="password"
-          id="password"
-          value={ password }
-          data-testid="password-input"
-          name="password"
-          onChange={ (e) => setPassword(e.target.value) }
-        />
-      </label>
+        </div>
 
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ !validated }
-        onClick={ btnSubmit }
-      >
-        Entrar
-      </button>
-    </form>
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ !validated }
+          onClick={ btnSubmit }
+        >
+          Login
+        </button>
+      </form>
+
+    </section>
   );
 }
 
