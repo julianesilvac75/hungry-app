@@ -39,7 +39,6 @@ function DetalhesDeBebidas({ match: { params: { id } } }) {
     ));
   }
 
-  console.log(recipeDetails);
   return (
     <div>
       {
