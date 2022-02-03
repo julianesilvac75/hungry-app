@@ -6,7 +6,7 @@ import AppRecipesProvider from '../context/AppRecipesProvider';
 const renderWithRouter = (component, route) => ({
   ...render(
     <AppRecipesProvider>
-      <MemoryRouter initialEntry={ [route] }>{ component }</MemoryRouter>
+      <MemoryRouter initialEntries={ [route] }>{ component }</MemoryRouter>
     </AppRecipesProvider>,
   ),
 });

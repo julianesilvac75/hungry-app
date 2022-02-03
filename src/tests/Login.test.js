@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
-import renderWithRouter from './index';
+import renderWithRouter from './testConfig';
 
 const EMAIL_INPUT = 'email-input';
 const PASSWORD_INPUT = 'password-input';
@@ -14,7 +14,7 @@ const INVALID_EMAIL_1 = 'alguem';
 const INVALID_PASSWORD = '12345';
 
 describe('Login Page', () => {
-  test('1- Verifica se existe input de email e senha', () => {
+  it('1- Verifica se existe input de email e senha', () => {
     const { getByTestId } = renderWithRouter(<App />, '/');
 
     const email = getByTestId(EMAIL_INPUT);
@@ -24,7 +24,7 @@ describe('Login Page', () => {
     expect(password).toBeInTheDocument();
   });
 
-  test('2-Verifica se existe botão Entrar', () => {
+  it('2-Verifica se existe botão Entrar', () => {
     const { getByTestId } = renderWithRouter(<App />, '/');
 
     const loginSubmitBtn = getByTestId(BTN_LOGIN_SUBMIT);
@@ -32,7 +32,7 @@ describe('Login Page', () => {
     expect(loginSubmitBtn).toBeInTheDocument();
   });
 
-  test('3-Verifica se botão habilita caso email e senha seja válido ', () => {
+  it('3-Verifica se botão habilita caso email e senha seja válido ', () => {
     const { getByTestId } = renderWithRouter(<App />, '/');
     const loginSubmitBtn = getByTestId(BTN_LOGIN_SUBMIT);
     expect(loginSubmitBtn).toBeDisabled();
@@ -57,7 +57,7 @@ describe('Login Page', () => {
     expect(loginSubmitBtn).toBeEnabled();
   });
 
-  test('4-Verifica se botão quando habilitado vai para rota /foods', async () => {
+  it('4-Verifica se botão quando habilitado vai para rota /foods', async () => {
     const { getByTestId } = renderWithRouter(<App />, '/');
 
     const email = getByTestId(EMAIL_INPUT);
