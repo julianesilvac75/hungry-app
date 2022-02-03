@@ -8,7 +8,7 @@ const EXPLORE_FOOD = 'explore-foods';
 const EXPLORE_DRINKS = 'explore-drinks';
 
 describe('Tela de Explorar', () => {
-  it('Verifica elementos das página', () => {
+  it('1-Verifica elementos das página', () => {
     const { getByTestId } = renderWithRouter(<App />, '/explore');
 
     const exploreFood = getByTestId(EXPLORE_FOOD);
@@ -18,7 +18,7 @@ describe('Tela de Explorar', () => {
     expect(exploreDrinks).toContainHTML('Explore Drinks');
   });
 
-  it('Verifica ao clicar explore food vai /explore/foods', () => {
+  it('2-Verifica ao clicar explore food vai /explore/foods', () => {
     const { getByTestId } = renderWithRouter(<App />, '/explore');
 
     const exploreFood = getByTestId(EXPLORE_FOOD);
@@ -28,7 +28,7 @@ describe('Tela de Explorar', () => {
     expect(title).toContainHTML('Explore Foods');
   });
 
-  it('Verifica ao clicar explore drink vai /explore/drinks', () => {
+  it('3-Verifica ao clicar explore drink vai /explore/drinks', () => {
     const { getByTestId } = renderWithRouter(<App />, '/explore');
 
     const exploreDrinks = getByTestId(EXPLORE_DRINKS);
