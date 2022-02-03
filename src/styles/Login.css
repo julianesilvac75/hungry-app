@@ -17,6 +17,7 @@
 }
 
 .login-form {
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.541);
   border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -24,32 +25,30 @@
   flex-direction: column;
   gap: 15px;
   justify-content: center;
-  align-items: center;
   margin-top: 40px;
   padding: 40px 0;
   width: 90%;
 }
 
 .login-form div {
+  align-items: center;
+  background-color: white;
   border-radius: 5px;
   border: 1px solid black;
   display: flex;
-  background-color: white;
   gap: 10px;
-  align-items: center;
   height: 40px;
-  text-align: center;
   padding-left: 10px;
+  text-align: center;
   width: 80%;
 }
 
 .login-form input {
-  width: 80%;
-  outline: none;
   border: none;
+  outline: none;
+  width: 80%;
 }
 
 .login-form input::placeholder {
   font-size: 12px;
-  
 }
