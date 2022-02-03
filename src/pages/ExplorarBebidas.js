@@ -7,7 +7,6 @@ import fetchAPI from '../services/api';
 
 function ExplorarBebidas() {
   const [surpriseRecipe, setSurpriseRecipe] = useState([]);
-  console.log(surpriseRecipe);
 
   function handleSurpriseRecipe() {
     const URL = URLS.drinks.randomRecipe;

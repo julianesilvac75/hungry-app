@@ -8,7 +8,6 @@ import fetchAPI from '../services/api';
 
 function ExplorarComida() {
   const [surpriseRecipe, setSurpriseRecipe] = useState([]);
-  console.log(surpriseRecipe);
 
   function handleSurpriseRecipe() {
     const URL = URLS.foods.randomRecipe;
