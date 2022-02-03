@@ -1,12 +1,13 @@
 import React from 'react';
 
+const index = 2;
+
 function IngredientsCard() {
   return (
     <div>
       <button
         type="button"
         data-testid={ `${index}-ingredient-card` }
-        onClick="olá"
       >
         <img
           src=""
