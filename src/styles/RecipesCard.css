@@ -1,0 +1,19 @@
+.recipe-card {
+  width: 150px;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.recipe-title {
+  font-size: 22px;
+  margin: 5px;
+  text-align: center;
+  color: black;
+}
+
+.recipe-image {
+  border-radius: 5px;
+  max-width: 100%;
+  object-fit: cover;
+}

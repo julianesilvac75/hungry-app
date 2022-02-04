@@ -6,6 +6,7 @@ import { URLS, TWELVE, FIVE } from '../services/constants';
 import RecipesCard from '../components/RecipesCard';
 import fetchAPI from '../services/api';
 import AppRecipesContext from '../context/AppRecipesContext';
+import '../styles/ReceitasDeComidas.css';
 
 function ReceitasDeComidas() {
   const { startFoods, ingredientFood } = useContext(AppRecipesContext);
@@ -73,7 +74,15 @@ function ReceitasDeComidas() {
 
   function renderCategories() {
     return (
-      <div>
+      <div className="categories-container">
+        <button
+          type="button"
+          className="category-button"
+          onClick={ () => setRecipesFiltered([]) }
+          data-testid="All-category-filter"
+        >
+          All
+        </button>
         {
           categories
             .filter((category, i) => i < FIVE)
@@ -81,6 +90,7 @@ function ReceitasDeComidas() {
               <button
                 type="button"
                 key={ strCategory }
+                className="category-button"
                 data-testid={ `${strCategory}-category-filter` }
                 onClick={ () => categoriesBtnHandler(strCategory) }
               >
@@ -89,13 +99,6 @@ function ReceitasDeComidas() {
               </button>
             ))
         }
-        <button
-          type="button"
-          onClick={ () => setRecipesFiltered([]) }
-          data-testid="All-category-filter"
-        >
-          All
-        </button>
       </div>
     );
   }
@@ -103,14 +106,18 @@ function ReceitasDeComidas() {
   return (
     <div>
       <Header titleHeader="Foods" isVisible getRecipesFromApi={ getRecipesFromApi } />
-      {
-        categories.length > 1 && renderCategories()
-      }
+      <div className="foods-section">
+        {
+          categories.length > 1 && renderCategories()
+        }
+        <div className="recipes-container">
+          {
+            recipes.length > 1 && renderCards()
+          }
+        </div>
 
-      {
-        recipes.length > 1 && renderCards()
-      }
-      <Footer />
+      </div>
+      <Footer className="main-div" />
     </div>
   );
 }

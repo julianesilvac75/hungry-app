@@ -1,0 +1,33 @@
+.foods-section {
+  position: relative;
+  padding-top: 80px;
+  z-index: 1;
+  padding-bottom: 80px;
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 15px;
+
+}
+
+.category-button {
+  background-color: #faa352;
+  border-radius: 5px;
+  width: 100px;
+  padding: 5px;
+  letter-spacing: 1px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.recipes-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  bottom: 80px;
+}
