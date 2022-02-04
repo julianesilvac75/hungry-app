@@ -53,6 +53,7 @@ function Login(props) {
 
         <button
           type="button"
+          className="button"
           data-testid="login-submit-btn"
           disabled={ !validated }
           onClick={ btnSubmit }
