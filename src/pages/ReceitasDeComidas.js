@@ -106,7 +106,7 @@ function ReceitasDeComidas() {
   return (
     <div>
       <Header titleHeader="Foods" isVisible getRecipesFromApi={ getRecipesFromApi } />
-      <div className="foods-section">
+      <div className="recipes-section">
         {
           categories.length > 1 && renderCategories()
         }

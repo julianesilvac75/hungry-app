@@ -6,6 +6,7 @@ import RecipesCard from '../components/RecipesCard';
 import { URLS, TWELVE, FIVE } from '../services/constants';
 import fetchAPI from '../services/api';
 import AppRecipesContext from '../context/AppRecipesContext';
+import '../styles/ReceitasDeBebidas.css';
 
 function ReceitasDeBebidas() {
   const [recipes, setRecipes] = useState([]);
@@ -71,7 +72,15 @@ function ReceitasDeBebidas() {
 
   function renderCategories() {
     return (
-      <div>
+      <div className="categories-container">
+        <button
+          type="button"
+          className="category-button drink-button"
+          onClick={ () => setRecipesFiltered([]) }
+          data-testid="All-category-filter"
+        >
+          All
+        </button>
         {
           categories
             .filter((category, i) => i < FIVE)
@@ -79,6 +88,7 @@ function ReceitasDeBebidas() {
               <button
                 type="button"
                 key={ strCategory }
+                className="category-button  drink-button"
                 data-testid={ `${strCategory}-category-filter` }
                 onClick={ () => categoriesBtnHandler(strCategory) }
               >
@@ -87,13 +97,6 @@ function ReceitasDeBebidas() {
               </button>
             ))
         }
-        <button
-          type="button"
-          onClick={ () => setRecipesFiltered([]) }
-          data-testid="All-category-filter"
-        >
-          All
-        </button>
       </div>
     );
   }
@@ -101,13 +104,16 @@ function ReceitasDeBebidas() {
   return (
     <div>
       <Header titleHeader="Drinks" isVisible getRecipesFromApi={ getRecipesFromApi } />
-      {
-        categories.length > 1 && renderCategories()
-      }
-
-      {
-        recipes.length > 1 && renderCards()
-      }
+      <div className="recipes-section">
+        {
+          categories.length > 1 && renderCategories()
+        }
+        <div className="recipes-container">
+          {
+            recipes.length > 1 && renderCards()
+          }
+        </div>
+      </div>
       <Footer />
     </div>
   );
