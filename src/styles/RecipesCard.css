@@ -2,14 +2,21 @@
   width: 150px;
   padding: 5px;
   border-radius: 5px;
+  height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .recipe-title {
-  font-size: 22px;
+  font-size: 20px;
   margin: 5px;
   text-align: center;
   color: black;
+  text-overflow: ellipsis;
+  width: 120px;
+  overflow: hidden;
 }
 
 .recipe-image {
