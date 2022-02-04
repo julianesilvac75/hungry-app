@@ -5,4 +5,13 @@
   left: 0;
   position: fixed;
   right: 0;
+  align-items: center;
+  padding: 10px;
+  min-height: 70px;
+  background-color: #faa352;
+}
+
+.icon-size {
+  font-size: 33px;
+  border: none;
 }

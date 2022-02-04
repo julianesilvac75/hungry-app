@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { GiKnifeFork, GiCompass } from 'react-icons/gi';
+import { BiDrink } from 'react-icons/bi';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
@@ -17,10 +19,11 @@ function Footer() {
           type="button"
           src={ drinkIcon }
         >
-          <img
+          <BiDrink className="icon icon-size" />
+          {/* <img
             src={ drinkIcon }
             alt="Drink Icon"
-          />
+          /> */}
         </button>
       </Link>
 
@@ -30,10 +33,11 @@ function Footer() {
           type="button"
           src={ exploreIcon }
         >
-          <img
+          <GiCompass className="icon icon-size" />
+          {/* <img
             src={ exploreIcon }
             alt="Explore Icon"
-          />
+          /> */}
         </button>
 
       </Link>
@@ -43,10 +47,11 @@ function Footer() {
           type="button"
           src={ mealIcon }
         >
-          <img
+          <GiKnifeFork className="icon icon-size" />
+          {/* <img
             src={ mealIcon }
             alt="Meal Icon"
-          />
+          /> */}
         </button>
       </Link>
     </footer>);
