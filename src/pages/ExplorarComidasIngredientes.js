@@ -14,7 +14,11 @@ function ExplorarComidasIngredientes() {
 
   return (
     <div>
-      <Header titleHeader="Explore Ingredients" isVisible={ false } />
+      <Header
+        fixTitleSize="fix-title-size"
+        titleHeader="Explore Ingredients"
+        isVisible={ false }
+      />
       {
         ingredients.length > 0 && ingredients
           .filter((item, index) => index < TWELVE)

@@ -20,7 +20,11 @@ function ReceitasFeitas() {
 
   return (
     <div>
-      <Header titleHeader="Done Recipes" isVisible={ false } />
+      <Header
+        fixTitleSize="fix-title-size"
+        titleHeader="Done Recipes"
+        isVisible={ false }
+      />
       <FilterButtons setFilterButton={ setFilterButton } />
 
       {filterRecipes().map((recipe, index) => (<DoneFavRecipeCard

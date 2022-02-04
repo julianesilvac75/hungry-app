@@ -1,4 +1,45 @@
 .container {
+  align-items: center;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
+  min-height: 70px;
 }
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #faa352;
+  position: fixed;
+  width: 100%;
+  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+}
+
+.icon {
+  background-color: #faa352;
+  color: white;
+  font-size: 30px;
+}
+
+.header-title {
+  color: aliceblue;
+  letter-spacing: 2px;
+  align-self: center;
+  text-align: center;
+}
+
+.fix-container {
+  justify-content: flex-start;
+}
+
+.fix-title {
+  margin: auto;
+}
+
+.fix-title-size {
+  font-size: 30px;
+}
+
+

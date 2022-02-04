@@ -28,7 +28,11 @@ function ExplorarComidasNacionalidade() {
 
   return (
     <div>
-      <Header titleHeader="Explore Nationalities" isVisible />
+      <Header
+        fixTitleSize="fix-title-size"
+        titleHeader="Explore Nationalities"
+        isVisible
+      />
 
       <select
         onChange={ ({ target }) => setSelectValue(target.value) }

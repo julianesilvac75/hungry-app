@@ -21,6 +21,7 @@ function ExplorarComida() {
   return (
     <div>
       <Header
+        fixTitleSize="fix-title-size"
         titleHeader="Explore Foods"
         isVisible={ false }
       />

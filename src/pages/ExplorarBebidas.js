@@ -19,7 +19,11 @@ function ExplorarBebidas() {
 
   return (
     <div>
-      <Header titleHeader="Explore Drinks" isVisible={ false } />
+      <Header
+        fixTitleSize="fix-title-size"
+        titleHeader="Explore Drinks"
+        isVisible={ false }
+      />
       <Link
         to="/explore/drinks/ingredients"
         data-testid="explore-by-ingredient"
