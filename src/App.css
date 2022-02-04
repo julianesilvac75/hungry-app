@@ -36,6 +36,10 @@ input {
   color: white;
 }
 
+button {
+  background: none;
+}
+
 .link {
   background: none;
 }

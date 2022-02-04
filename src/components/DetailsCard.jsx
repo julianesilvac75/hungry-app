@@ -1,10 +1,13 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import { FiShare2 } from 'react-icons/fi';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import AppRecipesContext from '../context/AppRecipesContext';
+import '../styles/DetailsCard.css';
 
 const copy = require('clipboard-copy');
 
@@ -46,74 +49,98 @@ function DetailsCard({ recipeDetails }) {
   };
 
   return (
-    <section>
+    <section className="details-card">
       <img
         alt={ name }
         src={ image }
-        style={ { width: '150px' } }
+        className="details-image"
         data-testid="recipe-photo"
       />
-      <h1
-        data-testid="recipe-title"
-      >
-        {name}
-      </h1>
-      <button
-        src={ shareIcon }
-        type="button"
-        data-testid="share-btn"
-        onClick={ () => {
-          copy(window.location.href);
-          setLink(true);
-        } }
-      >
-        <img
-          alt="Share Icon"
-          src={ shareIcon }
-        />
-
-      </button>
-
-      {link && <p>Link copied!</p>}
-
-      <button
-        src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
-        data-testid="favorite-btn"
-        type="button"
-        onClick={ handleFavoriteButton }
-      >
-        <img
-          alt="Favorite Icon"
-          src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
-        />
-      </button>
-
-      <p
-        data-testid="recipe-category"
-      >
-        {pathname.includes('drink') ? alcoholicOrNot : category}
-
-      </p>
-      <h2>Ingredients</h2>
-      <ul>
-        { ingredients.map((ingredient, index) => (
-          <li
-            data-testid={ `${index}-ingredient-name-and-measure` }
-            key={ `${ingredient[1]} - ${index}` }
+      <div className="title-container">
+        <h1
+          className="details-title"
+          data-testid="recipe-title"
+        >
+          {name}
+        </h1>
+        <div>
+          <button
+            src={ shareIcon }
+            type="button"
+            data-testid="share-btn"
+            onClick={ () => {
+              copy(
+                window.location.href,
+              );
+              setLink(true);
+            } }
           >
-            { `${ingredient[1]} - ${measure[index] === undefined
-              ? '' : measure[index][1]}`}
-          </li>
-        ))}
-      </ul>
-      <h2>Instructions</h2>
-      <p data-testid="instructions">{instructions}</p>
-      {video && <iframe
-        title="Instructions"
-        data-testid="video"
-        src={ `https://www.youtube.com/embed/${video.split('v=')[1]}` }
-      />}
-      <h2>Recommended</h2>
+            <FiShare2 className="icon icon-bg" />
+            {/* <img
+            alt="Share Icon"
+            src={ shareIcon }
+          /> */}
+
+          </button>
+
+          <button
+            src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
+            data-testid="favorite-btn"
+            type="button"
+            onClick={ handleFavoriteButton }
+          >
+            {
+              verifyFavorite(id)
+                ? (
+                  <MdFavoriteBorder
+                    className="icon icon-bg"
+                  />) : <MdFavorite className="icon icon-bg" />
+            }
+            {/* <img
+            alt="Favorite Icon"
+            src={ verifyFavorite(id) ? blackHeartIcon : whiteHeartIcon }
+          /> */}
+          </button>
+
+        </div>
+      </div>
+      <div className="details-section">
+
+        {link && <p className="copied">Link copied!</p>}
+        <p
+          className="category"
+          data-testid="recipe-category"
+        >
+          {pathname.includes('drink') ? alcoholicOrNot : category}
+
+        </p>
+        <div className="ingredients-list">
+          <h2>Ingredients</h2>
+          <ul>
+            { ingredients.map((ingredient, index) => (
+              <li
+                className="ingredients"
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                key={ `${ingredient[1]} - ${index}` }
+              >
+                { `${ingredient[1]} - ${measure[index] === undefined
+                  ? '' : measure[index][1]}`}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="ingredients-list">
+          <h2>Instructions</h2>
+          <p data-testid="instructions">{instructions}</p>
+          {video && <iframe
+            title="Instructions"
+            data-testid="video"
+            src={ `https://www.youtube.com/embed/${video.split('v=')[1]}` }
+          />}
+        </div>
+        <h2>Recommended</h2>
+
+      </div>
     </section>);
 }
 
