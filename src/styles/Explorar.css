@@ -1,0 +1,17 @@
+.links-container {
+  position: relative;
+  padding-top: 100px;
+  z-index: 1;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.explore {
+  color: black;
+  min-width: 180px;
+  text-align: center;
+  padding: 10px !important;
+}
