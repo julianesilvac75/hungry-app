@@ -1,4 +1,4 @@
-# Trybetunes
+# HungryApp
 
 HungryApp is a recipes app build with ReactJS for mobile. Users should be able to search for recipes from all around the world using diferent types of filters, save their favorite recipes, register their progress in making that recipe, and there's also a possibility to create and edit a personal profile. For data, we used [TheMealDB API](https://www.themealdb.com/) and [The CockTailDB API](https://www.thecocktaildb.com/api.php).
 
