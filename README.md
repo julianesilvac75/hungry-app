@@ -4,9 +4,6 @@ HungryApp is a recipes app build with ReactJS for mobile. Users should be able t
 
 This was the final project for the Frontend Module of the FullStack Web Development course at [Trybe](https://www.betrybe.com/), and it was a group project. [Nathalia Miranda](https://github.com/nathaliamiranda), [Millene Galetti](https://github.com/MilleneGalettiAcosta), [Gabriel Pinheiro](https://github.com/GabrielFMPinheiro) and [André Mello](https://github.com/Andre-S-Melo) were part of this amazing team. :rocket:
 
-You can see the live project [here](https://trybetunes-nu.vercel.app/).
-
-
 ## Technologies
 
  - ReactJS
